@@ -1,0 +1,14 @@
+<h1>Login</h1>
+<div ng-controller="LoginController">
+          <div>
+            <label for="username">Login</label>
+            <input type="text" id="username" ng-model="user.username" />
+          </div>
+          <div
+            <label for="password">Password</label>
+            <input type="password" id="password" ng-model="user.password" />
+          </div>
+          <button ng-click="login()">Inscription</button>
+          {{ user.logged }}
+</div>
+ 

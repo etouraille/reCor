@@ -1,0 +1,28 @@
+<h1>Subscribe</h1>
+<form name="form" ng-controller="SubscribeController" class="css-form" novalidate>
+        <div class="list">
+             <label class="item item-input">
+                <input type="text" ng-model="user.username" name="username" placeholder="Nom" require minlength="1" />
+                <span ng-show="form.username.$error.require || form.username.$error.minlength">The name is mandatory</span>
+            </label>
+            <label class="item item-input">
+                <input type="email" ng-model="user.email" placeholder="Email" name="email" emailexists minlength="4"/>
+                <br />
+                <span ng-show="form.email.$pending.emailexists">Checking if this email is available...</span>
+                <span ng-show="form.email.$error.emailexists">This email is already taken!</span>
+                <span ng-show="form.email.$error.email">This email is invalid</span>
+                <span ng-show="form.email.$error.minlength">Min length value</span>
+            </label>
+                           <label class="item item-input">
+                <input type="password" ng-model="user.password1" placeholder="Mot de passe" minlength="4"/>
+            </label>
+            <label class="item item-input">
+                <input type="password" name="password2" ng-model="user.password2" placeholder="Confirmer le mot de passe" compare-to="user.password1" minlength="4"/>
+                <span ng-show="form.password2.$error.compareTo">Both password must match</span>
+                <span ng-show="form.password1.$error.minlength || form.password2.$error.minlength">Min length value 4</span>
+            </label>
+            <label class="item item-input">
+                <button class="button" ng-disabled="form.$invalid || form.username.$pristine || form.email.$pristine || form.password1.$pristine || form.password2.$pristine" ng-click="subscribe()">Inscription</button>
+            </label>
+        </div>
+</form>

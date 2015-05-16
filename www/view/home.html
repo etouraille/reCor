@@ -1,0 +1,16 @@
+<ion-header-bar class="bar bar-header bar-balanced">
+    <button class="button button-light">POST</button>
+    <button class="button button-light">SEARCH</button>
+</ion-header-bar>
+<ion-content>
+    <form ng-controller="AddController">
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" ng-model="diese" placeholder="#hastag" />
+            </label>
+            <label class="item item-input">
+                <button class="button" ng-click="submit()">Ajouter</button>
+            </label>
+        </div>
+    </form>
+</ion-content>
