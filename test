@@ -1,0 +1,8 @@
+cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyCr5WEghudoeh0iMBAyKTEw7Wdxt7eTF2g"
+
+com.google.playservices 23.0.0 "Google Play Services for Android"
+cordova-plugin-device 1.0.0 "Device"
+org.apache.cordova.geolocation 0.3.12 "Geolocation"
+plugin.google.maps 1.2.5 "phonegap-googlemaps-plugin"
+plugin.http.request 1.0.4 "phonegap-http-request"
+

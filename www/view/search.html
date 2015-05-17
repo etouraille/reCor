@@ -1,0 +1,27 @@
+<ion-header-bar class="bar bar-header bar-balanced">
+    <button class="button button-light">POST</button>
+    <button class="button button-light">SEARCH</button>
+</ion-header-bar>
+<ion-content>
+<div ng-controller="SearchController">
+    <form>
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" ng-model="diese" placeholder="#any" />
+            </label>
+             <label class="item item-input item-select">
+                 <div class="input-label">Select a distance</div>
+                 <select ng-options="option.label for option in options track by option.value" ng-model="distance" ></select>
+            </label>
+            <label class="item item-input">
+                <button class="button" ng-click="submit()">Search</button>
+            </label>
+        </div>
+    </form>
+    <ion-list>
+        <ion-item ng-repeat="result in results" >
+            {{ result._source.content }}
+        </ion-item>
+    </ion-list>
+</div>
+</ion-content>
