@@ -1,10 +1,5 @@
-<ion-header-bar class="bar bar-header bar-balanced">
-    <button class="button button-light">POST</button>
-    <button class="button button-light">SEARCH</button>
-</ion-header-bar>
-<ion-content>
 <div ng-controller="SearchController">
-    <form>
+   <form style="height:100%;position:absolute;width:100%">
         <div class="list">
             <label class="item item-input">
                 <input type="text" ng-model="diese" placeholder="#any" />
@@ -17,11 +12,11 @@
                 <button class="button" ng-click="submit()">Search</button>
             </label>
         </div>
+        <div id="map-canvas" width="100%" style="height:400px;position:relative;bottom:0px;top:0px;";></div>
     </form>
-    <ion-list>
+    <!--<ion-list>
         <ion-item ng-repeat="result in results" >
             {{ result._source.content }}
         </ion-item>
-    </ion-list>
+    </ion-list>-->
 </div>
-</ion-content>

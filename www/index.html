@@ -25,6 +25,7 @@
     <script type="text/javascript" src="js/controller/LoginController.js"></script>
     <script type="text/javascript" src="js/controller/AddController.js"></script>
     <script type="text/javascript" src="js/controller/SearchController.js"></script>
+    <script type="text/javascript" src="js/controller/HeaderController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
@@ -41,33 +42,21 @@
     <script type="text/javascript" src="lib/angular-md5/angular-md5.js"></script>
     <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
     <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script type="text/javascript">
-         var map;
-             document.addEventListener("deviceready", function() {
-                           var div = document.getElementById("map_canvas");
-
-                                 // Initialize the map view
-                                 map = plugin.google.maps.Map.getMap(div);
-
-                                       // Wait until the map is ready status.
-                                       map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
-                                           }, false);
-
-    function onMapReady() {
-              var button = document.getElementById("button");
-                    button.addEventListener("click", onBtnClicked, false);
-                        }
-
-    function onBtnClicked() {
-              map.showDialog();
-                  }
-    </script>
-  </head>
+    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
+    </head>
 
   <body ng-app="resourceApp">
-      <div ui-view></div>
-    <h3>PhoneGap-GoogleMaps-Plugin</h3>
-    <div style="width:100%;height:400px" id="map_canvas"></div>
-    <button id="button">Full Screen</button>
+    <ion-header-bar no-tap-scroll=true ng-controller="HeaderController" class="bar bar-header bar-balanced">
+        <div class="title">#@T : localize your resource</div>
+        Is Logged{{ isLogged }}
+        <div class="buttons" ng-show="isLogged">
+            <button ui-sref="home" class="button button-light">Add a resource</button>
+            <button ui-sref="search" class="button button-light">Search resources</button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+            <div ui-view></div>
+    </ion-content>
   </body>
 </html>

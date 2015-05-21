@@ -5,7 +5,8 @@ app.factory('AuthInterceptor',
         'AuthStorage',
         'Encryption', 
         '$injector',
-    function($q, storage, Encryption, $injector) {
+        '$rootScope',
+    function($q, storage, Encryption, $injector, $rootScope) {
   return {
     // optional method
     'request': function(config) {
@@ -31,7 +32,7 @@ app.factory('AuthInterceptor',
             $injector.get('Authentication').redirectToLogin();
           }
       } else { // especially in subscribe form, not in a logged area
-        return config
+        return config;
       }
     },
 
@@ -57,7 +58,9 @@ app.factory('AuthInterceptor',
    'responseError': function(rejection) {
       if(rejection.status == 401 || rejection.status == 403) {
             //storage.clean();//todo uncomment
+            $rootScope.$broadcast('unlogged');
             $injector.get('Authentication').redirectToLogin();
+            
 
       }
       return $q.reject(rejection);

@@ -20,5 +20,7 @@
 
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
-    </feature>
+  </feature>
+  <access origin="http://resource.objetspartages.org/*" />
+  <access origin="http://maps.googleapis.com/*" />
 </widget>

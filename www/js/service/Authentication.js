@@ -10,19 +10,20 @@ app.factory('Authentication', [
     'Encryption',
     'AuthStorage',
     '$state',
-    function($log, $http, md5, $cookieStore, $q , settings, encryption , storage, $state){
+    '$rootScope',
+    function($log, $http, md5, $cookieStore, $q , settings, encryption , storage, $state, $rootScope){
     
     return {
 
     getSaltFromServer : function (username) {
         var deferred = $q.defer();
-        console.log(username);
+        $log.log(username);
         $http.post(settings.endpoint+'salt', {username : username})
             .success(function(data,err){
                 if(data.success) {
                     deferred.resolve(data.salt);
                 } else {
-                    deferred.reject(data.error)
+                    deferred.reject(data.error);
                 }
              }).error(function(data){
                 deferred.reject(data);
@@ -47,19 +48,19 @@ app.factory('Authentication', [
                         'x-wsse': _wsse_key,
                         'Authorization' : 'WSSE profile="UsernameToken"'
                         }
-                }
-                $log.log('x-wsse',_wsse_key);
+                };
+                $log.log('x-wsse'+_wsse_key);
                 //return;
                 $http(_http_config)
                     .success(function(data){
                         if(data.success){
                             deferred.resolve(salt);
                         }else{
-                            deferred.reject(data.message);
+                            deferred.reject(data);
                         }
                     })
                     .error(function(data){
-                        deferred.reject(data.message)
+                        deferred.reject(data);
                     });
             
             },function(reason){
@@ -70,13 +71,18 @@ app.factory('Authentication', [
     },
 
     login : function(username, password) {
+        var deferred = $q.defer();
         $log.log('pass login', password);
         this.getSaltAndLogin( username, password).then(function(salt){
             $log.log('user logged'); 
+                $rootScope.$broadcast('logged');
                 storage.persist(username, password, salt );
+                deferred.resolve(true);
             }, function (reason) {
-            $log.log('failure while login process', reason );        
-        })
+            $log.log('failure while login process'+ reason );
+            deferred.reject(reason);
+        });
+        return deferred.promise;
     },
 
     redirectToLogin : function (){
@@ -85,7 +91,16 @@ app.factory('Authentication', [
 
     unlog : function () {
        $cookies.remove('auth'); 
+    }, 
+    isLogged : function(){
+        var userAuthObject = storage.get();
+        $log.log('useAuthObject', userAuthObject );
+        if(typeof userAuthObject === 'object') { 
+            return true;
+        } else { 
+            return false;
+        }
     }
 
-    }
+    };
 }]);

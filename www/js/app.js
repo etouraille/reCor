@@ -19,21 +19,25 @@ var app = angular.module('resourceApp', [
     // useful especially with forms, though we would prefer giving the user a little more room
     // to interact with the app.
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
     }
     if(window.StatusBar) {
       // Set the statusbar to use the default style, tweak this to
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
     }
+    
   });
 });
-
 app.config(['$httpProvider', function($httpProvider){
-    $httpProvider.defaults.headers.post  = {'Content-Type' : 'application/json' };
+    $httpProvider.defaults.headers.commons  = {
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Methods':'GET,OPTIONS,PUT,DELETE',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Credential':'true'
+    };
     $httpProvider.interceptors.push('AuthInterceptor');
 }]);
-
 app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $urlRouterProvider ){
     $urlRouterProvider.otherwise('/login');
 

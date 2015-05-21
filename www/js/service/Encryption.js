@@ -1,4 +1,4 @@
-"use strict";
+
 
 app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $log ){
     return {
@@ -29,6 +29,9 @@ app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $l
             }
             else{
                 date = new Date();
+                var microseconds = date.getTime();
+                var userOffset = date.getTimezoneOffset()*60000;
+                date = new Date(microseconds + userOffset + 2*60*60000);
             }
             function addZero(integer){
                 if(integer < 10){
@@ -51,7 +54,7 @@ app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $l
         getDigestWithAll: function ( raw, salt , nonce, created ) {
            //salt = '9320d97bc80eec01f366083a2bce5ef8'; 
            //raw = 'b1otope';
-           var _digest;
+           
             var _secret = this.encryptPassword(raw, salt );
             var _digest = this.getDigest(nonce,created,_secret);            
             return _digest;
@@ -64,5 +67,5 @@ app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $l
             var _wsse_header =  'UsernameToken Username="'+username+'", PasswordDigest="'+_digest+'", Nonce="'+ _nonce+'", Created="'+ _created+'"';
             return _wsse_header;
         }
-    }
-}])
+    };
+}]);
