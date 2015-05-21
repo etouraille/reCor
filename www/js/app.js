@@ -50,6 +50,11 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             url : '/search',
             templateUrl : 'view/search.html'
         })
+        .state('save_search',{
+            url : '/save-search',
+            templateUrl : 'view/save_search.html'
+        })
+
         .state('login',{
             url : '/login',
             templateUrl : 'view/login.html'
