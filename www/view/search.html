@@ -11,12 +11,38 @@
             <label class="item item-input">
                 <button class="button" ng-click="submit()">Search</button>
             </label>
+            <label class="item item-input">
+                <button class="button" ng-click="openModal()">Modal</button>
+            </label>
+
         </div>
         <div id="map-canvas" width="100%" style="height:400px;position:relative;bottom:0px;top:0px;";></div>
     </form>
-    <!--<ion-list>
-        <ion-item ng-repeat="result in results" >
-            {{ result._source.content }}
-        </ion-item>
-    </ion-list>-->
 </div>
+<script id="save-search" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div ng-controller="SaveSearchController">
+            <div class="row" ng-repeat="row in rows">
+                <div class="col" ng-repeat="hashtag in row">
+                    {{ hashtag }} <button class="button" ng-click="remove(hashtag)">Remove</button>
+                </div>
+            </div>
+           <ion-list>
+                <ion-item ng-repeat="hashtag in hashtags" ng-show="showAdd(hashtag)" class="item-button-right">
+                    {{ hashtag }}
+                    <button class="button button-positive" ng-click="add(hashtag)">
+                        <i class="icon ion-ios-telephone"></i>
+                    </button>
+                </ion-item>
+            </ion-list>
+            {{ myHashtags }}
+            {{ rows }}
+        </div>                   
+    </ion-content>
+</ion-modal-view>
+</script>
+

@@ -8,6 +8,7 @@ app.controller('SaveSearchController', [
             $http.get(settings.endpoint + 'logged-area/hashtag')
             .success(function(data){
                 $scope.hashtags = data;
+                $scope.myHashtags = [];
             });
             $http.get(settings.endpoint + 'logged-area/my/hashtag')
             .success(function(data){
@@ -17,32 +18,29 @@ app.controller('SaveSearchController', [
         $scope.init();
 
         $scope.showAdd = function(hashtag){
-            for(var i in $scope.myHashtags){
-                if($scope.myHashtags[i]['content']=== hashtag){
+            if($scope.myHashtags.indexOf( hashtag ) > -1) {
                 return false;
-                }
             }
             return true;
         };
         $scope.add = function(hashtag){
-            $scope.myHashtags.push({'content': hashtag});
+            $scope.myHashtags.push( hashtag );
+            group();
         };
         $scope.remove = function(hashtag){
-            angular.forEach($scope.myHastags, function(data){
-                if(data.content == hashtag){
-                  var index = currentIndex;
-                }
-            });
-            if(index){
-                $scope.myHashtags.splice(index,1);
+            console.log(hashtag);
+            index = $scope.myHashtags.indexOf( hashtag );
+            if(index > -1 ) {
+                 $scope.myHashtags.splice(index,1);
             }
+            group();
         };
         function group(){
             $scope.rows = [];
+            $scope.rows[0] = [];
             for(var i in $scope.myHashtags) {
                 var j=0;
                 var k=0;
-                $scope.grouped[0] = [];
                 if(j<5){
                     j++;
                 }else{
@@ -50,7 +48,8 @@ app.controller('SaveSearchController', [
                     k++;
                     $scope.rows[k]=[];
                 }
-                $scope.rows[k].push($scope.myHashtags[i]['content']);
+                var content = angular.copy( $scope.myHashtags[i]);
+                $scope.rows[k].push(content);
             }
         }
         $scope.$watch('myHashtags', function(){
