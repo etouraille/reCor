@@ -5,7 +5,7 @@ app.controller('AddController', ['$http', '$scope', 'settings', 'localization', 
         $scope.picture = false;
         navigator.camera.getPicture(function(imageData){
             $scope.disabled = true;
-            $http.post('http://fanny.objestpartages.org/put/', {content : imageData })
+            $http.post('http://fanny.objetspartages.org/put/', {content : imageData })
             .success(function(data){
                 $scope.picture = data.id;
                 $scope.disabled = false;
