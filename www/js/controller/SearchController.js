@@ -16,7 +16,7 @@ app.controller('SearchController', [
     $scope.results = [];
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/search';
-        localization.init(true).then(function(){
+        localization.init().then(function(){
             $log.log(localization.lon()); 
             $log.log(localization.lat()); 
             $http.post(url, 
@@ -53,19 +53,40 @@ app.controller('SearchController', [
             var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
             angular.forEach(results, function(result){
                 $log.log(result);
-                var marker = new google.maps.Marker({
+                var marker = {
                           position: new google.maps.LatLng(
                               parseFloat(result._source.geo.lat),
                               parseFloat(result._source.geo.lon)
                           ),
                           map: map,
-                          title: result._source.content
-                });
+                          title: result._source.content,
+                };
+                var image = {};
+                var shape = {};
+                if(result._source.picture){
+                    console.log('image');
+                    image = {
+                            url: 'http://fanny.objetspartages.org/get/thumbnail/' + result._source.picture,
+                            size: new google.maps.Size(100, 50),
+                            //         // The origin for this image is 0,0.
+                            origin: new google.maps.Point(0,0),
+                            // The anchor for this image is the base of the flagpole at 0,32.
+                            anchor: new google.maps.Point(0, 0)
+                     };
+                     shape = {
+                        coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+                            type: 'poly'
+                    };
+                    marker.icon = image;
+
+                }
+                
+                var marker = new google.maps.Marker(marker);
                 infowindow = new google.maps.InfoWindow({
                           content: result._source.content,
                           maxWidth: 200
                 });
-                infowindow.open(map,marker);
+                //infowindow.open(map,marker);
 
 
             });

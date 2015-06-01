@@ -1,27 +1,31 @@
 app.controller('AddController', ['$http', '$scope', 'settings', 'localization', '$log', function($http, $scope, settings, localization, $log){
 
+    $scope.disabled = false;
+    
     $scope.addPicture = function(){
         $scope.disabled = true;
         $scope.picture = false;
         navigator.camera.getPicture(function(imageData){
             $scope.disabled = true;
-            $http.post('http://fanny.objetspartages.org/put/', {content : imageData })
+            $http.post('http://fanny.objetspartages.org/put', {content : imageData })
             .success(function(data){
                 $scope.picture = data.id;
                 $scope.disabled = false;
             })
             .error(function(data){
-                $log.log('Error Uploading file : '+data );
+                $log.log('Error Uploading file : '+ data );
                 $scope.disabled = false;
             });
         }, function(message){
-            $log.log('Failed camera because: '+message)
+            $log.log('Failed camera because: '+ message );
+            $scope.error = 'Failed Camera' + message;
+            $scope.disabled = false;
         }, { 
             quality: 50,
             destinationType: Camera.DestinationType.DATA_URL
         });
 
-    }
+    };
     
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/add';

@@ -38,13 +38,14 @@ app.controller('SaveSearchController', [
         function group(){
             $scope.rows = [];
             $scope.rows[0] = [];
+            var k=0;
+            var j=0;
             for(var i in $scope.myHashtags) {
-                var j=0;
-                var k=0;
-                if(j<5){
+                if(j<4){
                     j++;
                 }else{
                     j = 0;
+                    j++;
                     k++;
                     $scope.rows[k]=[];
                 }
