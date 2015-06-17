@@ -5,14 +5,15 @@ app.controller('SearchController', [
     'localization', 
     '$log',
     '$ionicModal',
-    function($http, $scope, settings, localization, $log, $ionicModal) {
+    '$state',
+    function($http, $scope, settings, localization, $log, $ionicModal, $state) {
 
     $scope.options = [
         {value : '0.5km' , label : '500m'}, 
         {value : '1km',  label : '1km' },
         {value : '2km' , label : '2km' }
     ];
-    $scope.distance = '0.5km';
+    $scope.distance = '20km';
     $scope.results = [];
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/search';
@@ -48,11 +49,11 @@ app.controller('SearchController', [
         function initialize(lat,long,results){
             var mapOptions = {
                     center: { lat: lat, lng: long},
-                    zoom: 16
+                    zoom: 12
                 };
             var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
             angular.forEach(results, function(result){
-                $log.log(result);
+                $log.log('picture',result._source);
                 var marker = {
                           position: new google.maps.LatLng(
                               parseFloat(result._source.geo.lat),
@@ -71,7 +72,8 @@ app.controller('SearchController', [
                             //         // The origin for this image is 0,0.
                             origin: new google.maps.Point(0,0),
                             // The anchor for this image is the base of the flagpole at 0,32.
-                            anchor: new google.maps.Point(0, 0)
+                            anchor: new google.maps.Point(0, 0),
+
                      };
                      shape = {
                         coords: [1, 1, 1, 20, 18, 20, 18 , 1],
@@ -86,40 +88,14 @@ app.controller('SearchController', [
                           content: result._source.content,
                           maxWidth: 200
                 });
-                //infowindow.open(map,marker);
 
-
+                google.maps.event.addListener(marker, function() {
+                    $state.go('resource', { id: result._source.id });
+                });
             });
         }
        initialize(lat,long,results);
-       //google.maps.event.addDomListener(window, 'load', initialize);
-        
     };
-
-    $ionicModal.fromTemplateUrl('save-search', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
-      });
-      $scope.openModal = function() {
-        $scope.modal.show();
-      };
-      $scope.closeModal = function() {
-        $scope.modal.hide();
-      };
-      //Cleanup the modal when we're done with it!
-      $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-      });
-      // Execute action on hide modal
-      $scope.$on('modal.hidden', function() {
-        // Execute action
-      });
-      // Execute action on remove modal
-      $scope.$on('modal.removed', function() {
-        // Execute action
-      });
 
 }]);
 

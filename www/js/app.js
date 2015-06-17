@@ -50,11 +50,6 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             url : '/search',
             templateUrl : 'view/search.html'
         })
-        .state('save_search',{
-            url : '/save-search',
-            templateUrl : 'view/save_search.html'
-        })
-
         .state('login',{
             url : '/login',
             templateUrl : 'view/login.html'
@@ -62,6 +57,11 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
         .state('subscribe',{
             url : '/subscribe',
             templateUrl : 'view/subscribe.html'
+        })
+        .state('resource',{
+            url : '/resource/:id',
+            templateUrl : 'view/resource.html'
         });
+
 }]);
 

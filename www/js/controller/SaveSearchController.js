@@ -1,16 +1,18 @@
 app.controller('SaveSearchController', [
     '$http', 
-    '$scope', 
-    'settings', 
+    '$scope',
+    '$rootScope',
+    'settings',
+    '$ionicPopup',
     '$log',
-    function($http, $scope, settings, $log) {
+    function($http, $scope, $rootScope, settings,$ionicPopup, $log) {
         $scope.init = function(){
             $http.get(settings.endpoint + 'logged-area/hashtag')
             .success(function(data){
                 $scope.hashtags = data;
                 $scope.myHashtags = [];
             });
-            $http.get(settings.endpoint + 'logged-area/my/hashtag')
+            $http.get(settings.endpoint + 'logged-area/hashtag/mine')
             .success(function(data){
                 $scope.myHashtags = data;
             });
@@ -28,7 +30,7 @@ app.controller('SaveSearchController', [
             group();
         };
         $scope.remove = function(hashtag){
-            console.log(hashtag);
+            $log.log(hashtag);
             index = $scope.myHashtags.indexOf( hashtag );
             if(index > -1 ) {
                  $scope.myHashtags.splice(index,1);
@@ -56,4 +58,23 @@ app.controller('SaveSearchController', [
         $scope.$watch('myHashtags', function(){
             group();
         });
+
+        $scope.saveSearch = function() {
+            $http.post(settings.endpoint + 'logged-area/hashtag/update', { hashtags : $scope.myHashtags})
+            .success(function(data){
+                $log.log('success saving my hashtags');
+                var ionicPopup = $ionicPopup.alert({
+                    title : 'Your Search have been saved',
+                    template : 'Your Search Have been Saved<br />'
+                    + 'You will be notified when'
+                    + ' a resource is around you'
+                });
+                ionicPopup.then(function() {
+                    $scope.closeModal();
+                });
+            })
+            .error(function(data){
+                $log.log('Error while saving data');
+            });
+        }
 }]);

@@ -1,6 +1,16 @@
 app.controller('AddController', ['$http', '$scope', 'settings', 'localization', '$log', function($http, $scope, settings, localization, $log){
 
     $scope.disabled = false;
+
+    $scope.endIntervalDatas = [
+        { label : 'never', value : 0  },
+        { label : '10min', value : 10  },
+        { label : '1h'   , value : 60  },
+        { label : '1day' , value : 1440 }
+
+    ];
+
+    $scope.endIntervalData = $scope.endIntervalDatas[0];
     
     $scope.addPicture = function(){
         $scope.disabled = true;
@@ -34,8 +44,9 @@ app.controller('AddController', ['$http', '$scope', 'settings', 'localization', 
             var data =  {'content': $scope.diese, 
                         'lat': localization.lat(), 
                         'lon' : localization.lon(),
-                       };
-            if($scope.picture){
+                        'endInterval' : $scope.endIntervalData.value
+                   };
+        if($scope.picture){
                 data['picture'] = $scope.picture;
             }
 

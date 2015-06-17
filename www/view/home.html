@@ -4,6 +4,11 @@
             <input type="text" ng-model="diese" placeholder="#hastag" name="hashtag" hashtag/>
             <span ng-show="form.hashtag.$error.hashtag">Must Not Contain Blancks</span>
         </label>
+        <label class="item item-input item-select">
+            <div class="input-label">The resource won't be available anymore in</div>
+            <select ng-options="option.label for option in endIntervalDatas track by option.value" ng-model="endIntervalData" name="endIntervalData"></select>
+        </label>
+
        <label class="item item-input">
             <button class="button icon-left ion-image" ng-click="addPicture()">Add A Picture</button>
         </label>
