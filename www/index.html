@@ -28,6 +28,8 @@
     <script type="text/javascript" src="js/controller/SaveSearchController.js"></script>
     <script type="text/javascript" src="js/controller/ModalSearchController.js"></script>
     <script type="text/javascript" src="js/controller/HeaderController.js"></script>
+    <script type="text/javascript" src="js/controller/ResourceController.js"></script>
+    <script type="text/javascript" src="js/controller/ionSideMenus.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
@@ -50,16 +52,23 @@
     </head>
 
   <body ng-app="resourceApp">
-    <ion-header-bar no-tap-scroll=true ng-controller="HeaderController" class="bar bar-header bar-balanced">
-        <div class="title">#@T : localize your resource</div>
-        Is Logged{{ isLogged }}
-        <div class="buttons" ng-show="isLogged">
-            <button ui-sref="home" class="button button-light">Add a resource</button>
-            <button ui-sref="search" class="button button-light">Search resources</button>
-        </div>
-    </ion-header-bar>
-    <ion-content class="has-header">
-            <div ui-view></div>
-    </ion-content>
+    <ion-side-menus> 
+      <ion-side-menu-content ng-controller="ionSideMenus">
+        <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced"  ng-controller="HeaderController">
+            <div class="title">#@T</div>
+
+            <div class="buttons" ng-show="isLogged">
+                <button ui-sref="home" class="button button-light">Add a resource</button>
+                <button ui-sref="search" class="button button-light">Search resources</button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="has-header">
+            <div ui-view="center"></div>
+        </ion-content>
+      </ion-side-menu-content>
+      <ion-side-menu side="left">
+        <div ui-view="left"></div>
+      </ion-side-menu>
+    </ion-side-menus>
   </body>
 </html>

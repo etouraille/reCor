@@ -1,12 +1,13 @@
 app.controller('SearchController', [
     '$http', 
-    '$scope', 
+    '$scope',
+    '$rootScope',
     'settings', 
     'localization', 
     '$log',
     '$ionicModal',
     '$state',
-    function($http, $scope, settings, localization, $log, $ionicModal, $state) {
+    function($http, $scope, $rootScope, settings, localization, $log, $ionicModal, $state) {
 
     $scope.options = [
         {value : '0.5km' , label : '500m'}, 
@@ -89,8 +90,8 @@ app.controller('SearchController', [
                           maxWidth: 200
                 });
 
-                google.maps.event.addListener(marker, function() {
-                    $state.go('resource', { id: result._source.id });
+                google.maps.event.addListener(marker,'click', function() {
+                    $rootScope.$broadcast('left', result._source );
                 });
             });
         }

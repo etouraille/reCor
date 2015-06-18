@@ -1,4 +1,9 @@
-app.controller('HeaderController',['$scope','Authentication', function($scope,Authentication){
+app.controller('HeaderController',
+               [
+               '$scope',
+               'Authentication',
+               '$ionicSideMenuDelegate',
+               function($scope, Authentication, $ionicSideMenuDelegate ) {
     $scope.isLogged = Authentication.isLogged();
     $scope.$on('unlogged', function(event){
         $scope.isLogged = false;

@@ -5,4 +5,5 @@ app.constant('settings', {
         cycleNumber : 2
     },
     endpoint : 'http://resource/app_dev.php/',
+    cdn : 'http://fanny.objetspartages.org/'
 });

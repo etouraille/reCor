@@ -48,20 +48,23 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
         })
         .state('search',{
             url : '/search',
-            templateUrl : 'view/search.html'
+            views :{ 
+                'center' : { templateUrl : 'view/search.html' },
+                'left' : { templateUrl :   'view/resource.html' }    
+            }
         })
         .state('login',{
             url : '/login',
-            templateUrl : 'view/login.html'
+            views : {
+                'center' : { templateUrl : 'view/login.html'}
+            }
         })
         .state('subscribe',{
             url : '/subscribe',
-            templateUrl : 'view/subscribe.html'
-        })
-        .state('resource',{
-            url : '/resource/:id',
-            templateUrl : 'view/resource.html'
+            views : {
+                'center' : { templateUrl : 'view/subscribe.html' }
+            }
         });
-
+       
 }]);
 
