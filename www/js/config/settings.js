@@ -1,5 +1,3 @@
-"use strict";
-
 app.constant('settings', {
     encryption : {
         cycleNumber : 2

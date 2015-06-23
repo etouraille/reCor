@@ -44,7 +44,9 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
     $stateProvider
         .state('home',{
             url : '/home',
-            templateUrl : 'view/home.html'
+            views : {
+                'center' : { templateUrl : 'view/home.html' }
+            }
         })
         .state('search',{
             url : '/search',

@@ -62,6 +62,7 @@ app.controller('SearchController', [
                           ),
                           map: map,
                           title: result._source.content,
+                          optimized : false // enable clicking on the webView
                 };
                 var image = {};
                 var shape = {};
