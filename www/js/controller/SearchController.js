@@ -12,9 +12,10 @@ app.controller('SearchController', [
     $scope.options = [
         {value : '0.5km' , label : '500m'}, 
         {value : '1km',  label : '1km' },
-        {value : '2km' , label : '2km' }
+        {value : '2km' , label : '2km'},
+        { value : '10km', label : '10km'}
     ];
-    $scope.distance = '20km';
+    $scope.distance = $scope.options[3];
     $scope.results = [];
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/search';
@@ -22,8 +23,9 @@ app.controller('SearchController', [
             $log.log(localization.lon()); 
             $log.log(localization.lat()); 
             $http.post(url, 
-                       {'content': $scope.diese, 
-                        'distance' : $scope.distance,
+                       {
+                        'content': $scope.diese, 
+                        'distance' : $scope.distance.value,
                         'lat': localization.lat(), 
                         'lon' : localization.lon()
                        }
@@ -50,7 +52,7 @@ app.controller('SearchController', [
         function initialize(lat,long,results){
             var mapOptions = {
                     center: { lat: lat, lng: long},
-                    zoom: 12
+                    zoom: 15
                 };
             var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
             angular.forEach(results, function(result){
