@@ -30,6 +30,7 @@
     <script type="text/javascript" src="js/controller/HeaderController.js"></script>
     <script type="text/javascript" src="js/controller/ResourceController.js"></script>
     <script type="text/javascript" src="js/controller/ionSideMenus.js"></script>
+    <script type="text/javascript" src="js/controller/ReservedController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
@@ -58,8 +59,9 @@
             <div class="title">#@T</div>
 
             <div class="buttons" ng-show="isLogged">
-                <button ui-sref="home" class="button button-light">Add a resource</button>
-                <button ui-sref="search" class="button button-light">Search resources</button>
+                <button ui-sref="home" class="button button-light">Add</button>
+                <button ui-sref="search" class="button button-light">Search</button>
+                <button ui-sref="reserved" class="button button-light">Reserved</button>
             </div>
         </ion-header-bar>
         <ion-content class="has-header">

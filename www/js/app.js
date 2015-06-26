@@ -48,6 +48,13 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'center' : { templateUrl : 'view/home.html' }
             }
         })
+        .state('reserved',{
+            url : '/reserved',
+            views : {
+                'center' : { templateUrl : 'view/reserved.html' }
+            }
+        })
+
         .state('search',{
             url : '/search',
             views :{ 
