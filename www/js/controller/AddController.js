@@ -1,7 +1,21 @@
-app.controller('AddController', ['$http', '$scope', 'settings', 'localization', '$log', function($http, $scope, settings, localization, $log){
+app.controller('AddController', [
+    '$http', 
+    '$scope',
+    '$rootScope',
+    '$ionicSideMenuDelegate',
+    'settings', 
+    'localization', 
+    '$log', 
+    function($http, $scope, $rootScope, $ionicSideMenuDelegate, settings, localization, $log){
 
     $scope.disabled = false;
-
+    $scope.geo = false;
+    localization.init().then(function(){
+        $scope.geo = { 
+            lat : localization.lat(),
+            lng : localization.lon()
+        };
+    });
     $scope.endIntervalDatas = [
         { label : 'never', value : 0  },
         { label : '10min', value : 10  },
@@ -9,6 +23,13 @@ app.controller('AddController', ['$http', '$scope', 'settings', 'localization', 
         { label : '1day' , value : 1440 }
 
     ];
+
+    $scope.place = {};
+
+    $scope.$on('setPlace', function(event, data){
+        $scope.place = data;
+        $ionicSideMenuDelegate.toggleLeft();
+    });
 
     $scope.endIntervalData = $scope.endIntervalDatas[0];
     
@@ -36,16 +57,21 @@ app.controller('AddController', ['$http', '$scope', 'settings', 'localization', 
         });
 
     };
+
+    $scope.tag = function(){
+        $rootScope.$broadcast('left',$scope.geo);
+    }
     
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/add';
         
-        localization.init().then(function(){
-            var data =  {'content': $scope.diese, 
-                        'lat': localization.lat(), 
-                        'lon' : localization.lon(),
-                        'endInterval' : $scope.endIntervalData.value
-                   };
+        var data =  {
+                        'content': $scope.diese, 
+                        'lat': $scope.geo.lat, 
+                        'lon' : $scope.geo.lng,
+                        'endInterval' : $scope.endIntervalData.value,
+                        'place' : $scope.place
+        };
         if($scope.picture){
                 data['picture'] = $scope.picture;
             }
@@ -64,9 +90,6 @@ app.controller('AddController', ['$http', '$scope', 'settings', 'localization', 
             $log.log(data);
            });
 
-        }, function(erro){
-            $log.log('localization error',error);
-        });
-    };
+        };
 
 }]);

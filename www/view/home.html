@@ -1,22 +1,29 @@
 <form name="form" ng-controller="AddController">
     <div class="list">
+        <label class="item item-input" ng-hide="geo">
+            <span>Getting geo location ...</span>
+        </label>
         <label class="item item-input">
             <input type="text" ng-model="diese" placeholder="#hastag" name="hashtag" hashtag/>
             <span ng-show="form.hashtag.$error.hashtag">Must Not Contain Blancks</span>
         </label>
         <label class="item item-input item-select">
-            <div class="input-label">The resource won't be available anymore in</div>
+            <div class="input-label">The resource will deseapear in :</div>
             <select ng-options="option.label for option in endIntervalDatas track by option.value" ng-model="endIntervalData" name="endIntervalData"></select>
         </label>
+         <label class="item item-input item-select">
+            <div ng-hide="place.tag" class="input-label">Tag the place</div>
+            <div ng-show="place.tag" class="input-label">{{ place.tag }}</div>
+            <button ng-disabled="geo === false" class="button" ng-click="tag()">Tag</button>
+        </label>
+
+
 
        <label class="item item-input">
             <button class="button icon-left ion-image" ng-click="addPicture()">Add A Picture</button>
         </label>
         <label class="item item-input">
-            <button class="button" ng-disabled="disabled || form.hashtag.$error.hashtag || form.hashtag.$pristine" ng-click="submit()">Ajouter</button>
+            <button class="button" ng-disabled="geo === false || disabled || form.hashtag.$error.hashtag || form.hashtag.$pristine" ng-click="submit()">Ajouter</button>
         </label>
-        <label class="item item-input">
-            error : {{ error }}
-        </label>
-    </div> 
+   </div> 
 </form>

@@ -45,7 +45,8 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
         .state('home',{
             url : '/home',
             views : {
-                'center' : { templateUrl : 'view/home.html' }
+                'center' : { templateUrl : 'view/home.html' },
+                'left' : { templateUrl : 'view/place.html' }
             }
         })
         .state('reserved',{

@@ -1,0 +1,29 @@
+<div ng-controller="PlaceController">
+    <ion-list>
+        <ion-item >Known Places</ion-item>
+        <ion-item ng-repeat="place in places" class="item-button-right">
+            Tag : {{ place._source.tag }}</br>
+            Address : {{ place._source.address }}</br>
+            <button class="button button-positive" ng-click="select(place)">Select This Place</button>
+        </ion-item>
+    </ion-list>
+    <form name="form">
+        <div class="list">
+             <label class="item item-input">
+                Set a not yet defined place
+            </label>
+             <label class="item item-input">
+                <input type="text" ng-model="myPlace.tag" name="tag" placeholder="Tag" require minlength="1" />
+                <span ng-show="form.tag.$error.require || form.tag.$error.minlength">The tag is mandatory</span>
+            </label>
+            <label class="item item-input">
+                <textarea ng-model="myPlace.address" name="address" placeholder="Address" require minlength="1" /></textarea>
+                <span ng-show="form.address.$error.require || form.address.$error.minlength">The tag is mandatory</span>
+            </label>
+            <label class="item item-input">
+                <button class="button" ng-click="setAndSelect()">Tag this place and select it</button>
+            </label>
+        </div>
+    </form>
+</div>
+

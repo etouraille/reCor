@@ -1,0 +1,8 @@
+<div ng-controller="ReservedController">
+    <ion-list>
+        <ion-item ng-repeat="resource in resources" class="item-button-right">
+            {{ resource.content }}
+            <button class="button button-positive" ng-click="release(resource.id)">Release</button>
+        </ion-item>
+    </ion-list>
+</div>

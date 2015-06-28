@@ -87,7 +87,7 @@ app.controller('SearchController', [
 
                 }
                 
-                var marker = new google.maps.Marker(marker);
+                marker = new google.maps.Marker(marker);
                 infowindow = new google.maps.InfoWindow({
                           content: result._source.content,
                           maxWidth: 200
