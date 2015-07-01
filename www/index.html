@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="resourceApp" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -42,19 +42,23 @@
     <script type="text/javascript" src="js/directive/validation/EmailDirective.js"></script>
     <script type="text/javascript" src="js/directive/validation/CompareDirective.js"></script>
     <script type="text/javascript" src="js/directive/validation/HashtagDirective.js"></script>
+    <script type="text/javascript" src="js/directive/Notification.js"></script>
+    <script type="text/javascript" src="js/directive/Message.js"></script>
 
     <!-- configuration -->
     <script type="text/javascript" src="js/config/settings.js"></script>
     <!-- lib -->
+    <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="lib/angular-md5/angular-md5.js"></script>
     <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
     <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
+    <script src="js/index.js"></script>
     </head>
 
-  <body ng-app="resourceApp">
-    <ion-side-menus> 
+  <body notification id="notification" >
+    <ion-side-menus>
       <ion-side-menu-content ng-controller="ionSideMenus">
         <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced"  ng-controller="HeaderController">
             <div class="title">#@T</div>
@@ -66,6 +70,7 @@
             </div>
         </ion-header-bar>
         <ion-content class="has-header">
+            <message></message>
             <div ui-view="center"></div>
         </ion-content>
       </ion-side-menu-content>

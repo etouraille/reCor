@@ -10,7 +10,10 @@ var app = angular.module('resourceApp', [
     'ui.router'
 ])
 
-.run(function($ionicPlatform) {
+.run([
+    '$ionicPlatform',
+    '$rootScope',
+     function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
@@ -26,9 +29,8 @@ var app = angular.module('resourceApp', [
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
     }
-    
   });
-});
+}]);
 app.config(['$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.commons  = {
         'Content-Type' : 'application/json',
