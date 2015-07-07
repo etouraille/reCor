@@ -6,20 +6,38 @@ app.controller('SaveSearchController', [
     '$ionicPopup',
     '$log',
     function($http, $scope, $rootScope, settings,$ionicPopup, $log) {
+        
+        $scope.myHashtags = [];
         $scope.init = function(){
             $http.get(settings.endpoint + 'logged-area/hashtag')
             .success(function(data){
                 $scope.hashtags = data;
-                $scope.myHashtags = [];
             });
             $http.get(settings.endpoint + 'logged-area/hashtag/mine')
             .success(function(data){
                 $scope.myHashtags = data;
             });
         };
+
+        $scope.all = false;
+
+        $scope.setAll = function() {
+            $scope.myHashtags = [];
+        };
+
+        $scope.$watch(function() {
+            return $scope.myHashtags.length;
+        }, function() {
+            if($scope.myHashtags.length === 0 ) {
+                $scope.all = true;
+            } else {
+                $scope.all = false;
+            }
+        });
+        
         $scope.init();
 
-        $scope.showAdd = function(hashtag){
+        $scope.showAdd = function(hashtag) {
             if($scope.myHashtags.indexOf( hashtag ) > -1) {
                 return false;
             }
@@ -60,14 +78,14 @@ app.controller('SaveSearchController', [
         });
 
         $scope.saveSearch = function() {
-            $http.post(settings.endpoint + 'logged-area/hashtag/update', { hashtags : $scope.myHashtags})
+            $http.post(settings.endpoint + 'logged-area/hashtag/update', { hashtags : $scope.myHashtags, lat : $scope.$parent.location.lat , lon : $scope.$parent.location.lon })
             .success(function(data){
                 $log.log('success saving my hashtags');
                 var ionicPopup = $ionicPopup.alert({
                     title : 'Your Search have been saved',
-                    template : 'Your Search Have been Saved<br />'
-                    + 'You will be notified when'
-                    + ' a resource is around you'
+                    template : 'Your Search Have been Saved<br />' +
+                     'You will be notified when' +
+                     ' a resource is around you'
                 });
                 ionicPopup.then(function() {
                     $scope.closeModal();
@@ -76,5 +94,5 @@ app.controller('SaveSearchController', [
             .error(function(data){
                 $log.log('Error while saving data');
             });
-        }
+        };
 }]);

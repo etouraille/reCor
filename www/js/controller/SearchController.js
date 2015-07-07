@@ -15,35 +15,42 @@ app.controller('SearchController', [
         {value : '2km' , label : '2km'},
         { value : '10km', label : '10km'}
     ];
+
+    $scope.openModal = function() {
+        $rootScope.$broadcast('modal', $scope.localization );
+    };
+
+    $scope.localization = false;
+    localization.init().then(function(){
+        $scope.localization = { lat : localization.lat(), lon : localization.lon() };
+        $scope.submit();
+    }, function (error) {
+        $log.log('error localization', error );
+    });
+
     $scope.distance = $scope.options[3];
     $scope.results = [];
     $scope.submit = function(){
-        var url = settings.endpoint + 'logged-area/search';
-        localization.init().then(function(){
-            $log.log(localization.lon()); 
-            $log.log(localization.lat()); 
-            $http.post(url, 
-                       {
-                        'content': $scope.diese, 
-                        'distance' : $scope.distance.value,
-                        'lat': localization.lat(), 
-                        'lon' : localization.lon()
-                       }
-            )
-            .success(function(data){
-                    $log.log(data);
-                    $scope.map(localization.lat(),localization.lon(), data.hits.hits);
-                    $scope.results = data.hits.hits;
-                
-            })
-          .error(function(data){
-            $log.log(JSON.stringify(data)); 
-          });
+    var url = settings.endpoint + 'logged-area/search';
+        $http.post(url, 
+                   {
+                    'content': $scope.diese, 
+                    'distance' : $scope.distance.value,
+                    'lat': $scope.localization.lat, 
+                    'lon' : $scope.localization.lon
+                   }
+        )
+        .success(function(data){
+                $log.log(data);
+                $scope.map(localization.lat(),localization.lon(), data.hits.hits);
+                $scope.results = data.hits.hits;
+            
+        })
+      .error(function(data){
+        $log.log(JSON.stringify(data)); 
+      });
         
 
-        }, function(error){
-            $log.log('localization error'+error);
-        });
     };
     $scope.map =function(lat, long, results){
        $log.log('lat'+lat+'long'+long);

@@ -9,9 +9,13 @@ app.controller('ModalSearchController', [
       }).then(function(modal) {
         $scope.modal = modal;
       });
-      $scope.openModal = function() {
+      //event to open modal
+      $scope.location = false;
+      $scope.$on('modal', function(event, args ) {
         $scope.modal.show();
-      };
+        $scope.location = args;
+      });
+      
       $scope.closeModal = function() {
         $scope.modal.hide();
       };
