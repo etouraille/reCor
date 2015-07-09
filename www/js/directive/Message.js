@@ -1,5 +1,5 @@
 app.directive('message', 
-    [ '$log', function( $log ) {
+    [ '$log','$rootScope', function( $log , $rootScope ) {
         return {
             template : '' + 
             '<a  ng-show="thereIsAMessage" class="item item-icon-left" href="#">' + 
@@ -10,19 +10,15 @@ app.directive('message',
             link : function( scope,element, attr ) {
                 scope.thereIsAMessage = true;
                 scope.count = 1;
-                scope.message = 'coucou';
-                scope.$on('Notification', function(event, args) {
+                scope.message = 'nothing received';
+                scope.$on('push', function(event, args ) {
                     scope.$apply(function() {
-                        scope.message = args.data;
+                        scope.message = args.content;
                         scope.count ++;
                         scope.thereIsAMessage = true;
                     });
                     $log.log('IN DIRECTIVE' + args.data );
                 });
-
-                            
-            }/*, 
-            controller : [ '$scope',  function($scope ) {
-                            }]*/
+            }
         };
 }]);

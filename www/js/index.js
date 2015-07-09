@@ -34,6 +34,8 @@ var appCordova = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         appCordova.receivedEvent('deviceready');
+        var eventDeviceReady = new CustomEvent('deviceready');
+        document.getElementById('notification').dispatchEvent(eventDeviceReady);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
