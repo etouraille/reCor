@@ -4,5 +4,5 @@ app.constant('settings', {
     },
     endpoint : 'http://resource.objetspartages.org/app_dev.php/',
     cdn : 'http://fanny.objetspartages.org/',
-    androidProjectNumber : 672537723017
+    androidProjectNumber : '672537723017'
 });

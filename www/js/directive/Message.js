@@ -12,7 +12,7 @@ app.directive('message',
                 '{{ message }}' + 
                 '<span class="badge badge-assertive">{{ count }}</span>' +
                 '<button class="button" ng-disabled="registered" ng-click="register()">' +
-                'register</button>' + '{{ bar }}' +
+                'register</button>' + 
             '</a>',
             link : function( scope, element, attr ) {
                 scope.thereIsAMessage = true;
@@ -27,11 +27,6 @@ app.directive('message',
                     });
                     $log.log('IN DIRECTIVE' + args.data );
                 });
-                $rootScope.bar = 'foo';
-
-                scope.register = function () {
-                    $log.log('>>>>>>>>>>>>>>>>>>>>>>>>>','<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
-                }
                 scope.$on('deviceready', function() {
                     scope.$apply(function() {
                         $log.log('IN APPPPPLLLLLYYYYYYYYYYYYYYYYY');
@@ -41,18 +36,18 @@ app.directive('message',
                                 Notification.successHandler,
                                 Notification.errorHandler,
                                 {
-                                    'senderId' : settings.androidProjectNumber,
-                                    'ecb' : "Notification.onNotification",
+                                    'senderID' : settings.androidProjectNumber,
+                                    'ecb' : "onNotification",
                                 }
                             );
                         };
                     });
                 });
                 scope.$on('registered', function(){
-                    scope.$apply(function() {
                         scope.registered = true;
-                    });
                 });
+            
+            onNotification = Notification.onNotification;
             }
         };
 }]);

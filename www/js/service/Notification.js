@@ -13,7 +13,7 @@ app.factory('Notification',
             },
 
             errorHandler : function ( result )  {
-                $log.log('error while registering push : '+ error );
+                $log.log('error while registering push : '+ result );
                 $rootScope.bar = 'error' + result;
             },
             
@@ -26,12 +26,16 @@ app.factory('Notification',
                     if ( e.regid.length > 0 )
                     {
                         $log.log("regID = " + e.regid);
-                        $http.post(settings.endoint + 'logged-area/notification/register/',
+                        $http.post(settings.endpoint + 'logged-area/notification/register',
                                    { device : 'android', regId : e.regid})
                                    .success(function(data){
-                                        if(data.sucess) {    
+                                        $log.log('success' + data)
+                                        if(data.success) {    
                                             $rootScope.$broadcast('registered');
                                         }
+                                   })
+                                   .error(function(data){
+                                        $log.log('error ' + data)
                                    });
                     }
                 break;
