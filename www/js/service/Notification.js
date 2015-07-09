@@ -8,15 +8,18 @@ app.factory('Notification',
     return {
             successHandler : function ( result ) {
                 $log.log(result);
+                $rootScope.bar = 'success'+result;
                 // toda call api to store the token for user
             },
 
             errorHandler : function ( result )  {
                 $log.log('error while registering push : '+ error );
+                $rootScope.bar = 'error' + result;
             },
             
             onNotification : function ( e ) {
                 $rootScope.$broadcast('notification', {'event' : e.event });
+                $rootScope.bar = 'event' + e.event;
                 switch( e.event )
                 {
                 case 'registered':
@@ -24,7 +27,12 @@ app.factory('Notification',
                     {
                         $log.log("regID = " + e.regid);
                         $http.post(settings.endoint + 'logged-area/notification/register/',
-                                   { device : 'android', regId : e.regid});
+                                   { device : 'android', regId : e.regid})
+                                   .success(function(data){
+                                        if(data.sucess) {    
+                                            $rootScope.$broadcast('registered');
+                                        }
+                                   });
                     }
                 break;
 

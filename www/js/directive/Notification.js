@@ -3,8 +3,7 @@ app.directive('notification',
                   '$rootScope', 
                   '$log', 
                   'settings',
-                  'Notification',
-                  function( $rootScope, $log, settings, Notification ) {
+                  function( $rootScope, $log, settings ) {
   return {
     link : function(scope,element){
         element.bind('Notification', function(event){
@@ -13,15 +12,7 @@ app.directive('notification',
         });
         element.bind('deviceready', function(event){
             $rootScope.$broadcast('deviceready');
-            $rootScope.pushNotification = window.plugins.pushNotification;
-            $rootScope.pushNotification.register(
-                Notification.successHandler,
-                Notification.errorHandler,
-                {
-                    'senderId' : settings.androidProjectNumeber,
-                    'ecb' : "Notification.onNotification",
-                }
-            );
+            $log.log('DEVIIIIIIIIIIIIIIIIIIIIIIIICEEEE REEAAAAAAAAAAAAAAAAADY : cool isn\'it ?');
         });
     }
   };
