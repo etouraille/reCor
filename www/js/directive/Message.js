@@ -15,31 +15,24 @@ app.directive('message',
                 'register</button>' + 
             '</a>',
             link : function( scope, element, attr ) {
-                scope.thereIsAMessage = true;
-                scope.count = 1;
+                scope.thereIsAMessage = false;
+                scope.count = 0;
                 scope.message = 'nothing received';
                 scope.register = true;
                 scope.$on('push', function(event, args ) {
+                    $log.log('push event :  ' + JSON.stringify( args ) );
                     scope.$apply(function() {
                         scope.message = args.content;
                         scope.count ++;
                         scope.thereIsAMessage = true;
                     });
-                    $log.log('IN DIRECTIVE' + args.data );
                 });
                 scope.$on('deviceready', function() {
                     scope.$apply(function() {
                         $log.log('IN APPPPPLLLLLYYYYYYYYYYYYYYYYY');
                         scope.register = function() {
                             $rootScope.bar = 'call reg';
-                            window.plugins.pushNotification.register(
-                                Notification.successHandler,
-                                Notification.errorHandler,
-                                {
-                                    'senderID' : settings.androidProjectNumber,
-                                    'ecb' : "onNotification",
-                                }
-                            );
+                            
                         };
                     });
                 });

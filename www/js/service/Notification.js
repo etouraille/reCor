@@ -20,12 +20,20 @@ app.factory('Notification',
             onNotification : function ( e ) {
                 $rootScope.$broadcast('notification', {'event' : e.event });
                 $rootScope.bar = 'event' + e.event;
+                $log.log('notification : '+ JSON.stringify(e));
                 switch( e.event )
                 {
                 case 'registered':
                     if ( e.regid.length > 0 )
                     {
                         $log.log("regID = " + e.regid);
+                        //the registration process can be done only if the user is logged 
+                        //it is done on each launch 
+                        //check if the user is authentified and if the registration token 
+                        //changes on each registration.
+                        // pb : the app might be fourgroud, but still on the screen, 
+                        // while screen is lock for exemple : the notification, fires
+                        // and nothing display on the messaging screen.
                         $http.post(settings.endpoint + 'logged-area/notification/register',
                                    { device : 'android', regId : e.regid})
                                    .success(function(data){
@@ -58,15 +66,17 @@ app.factory('Notification',
                         if ( e.coldstart )
                         {
                             //todo coldstart notification.
+                            //the message displays when we hit notification
+                            //todo check if we can send some custom contents to display logics.
                         }
                         else
                         {
-                            //todo background notification
+                            $log.log('background');
                         }
                     }
                     $rootScope.$broadcast('push', {type : 'classic', content : e.payload.message});
                     //Only works for GCM
-                    $rootScope.$broadcast('push', {type : 'gcm' , content : e.payload.msgcnt});
+                    //$rootScope.$broadcast('push', {type : 'gcm' , content : e.payload.msgcnt});
                     //
                    //Only works on Amazon Fire OS
                    //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
