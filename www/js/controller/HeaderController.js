@@ -11,4 +11,7 @@ app.controller('HeaderController',
      $scope.$on('logged', function(event){
         $scope.isLogged = true;
     });
+    $scope.rightMenu = function(){
+        $ionicSideMenuDelegate.toggleRight();
+    };
 }]);

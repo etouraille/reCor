@@ -23,7 +23,7 @@ app.controller('SubscribeController', [
                     $scope.user.password1, 
                     data.message.salt
                 );
-                $state.go('home');
+                $state.go('search');
             }else{
                 $log.log('problème while user creation');
                 $scope.error = true;

@@ -5,55 +5,8 @@
                 Localization ...
             </label>
 
-            <label class="item item-input">
-                <input type="text" ng-model="diese" placeholder="#any" />
-            </label>
-             <label class="item item-input item-select">
-                 <div class="input-label">Select a distance</div>
-                 <select ng-options="option.label for option in options track by option.value" ng-model="distance" ></select>
-            </label>
-            <label class="item item-input">
-                <button ng-disabled="localization === false" class="button" ng-click="submit()">Search</button>
-            </label>
-            <label class="item item-input">
-                <button class="button" ng-click="openModal()">My Search</button>
-            </label>
         </div>
-        <div id="map-canvas" width="100%" style="height:400px;position:relative;bottom:0px;top:0px;";></div>
+        <div id="map-canvas"></div>
     </form>
 </div>
-<script id="save-search" type="text/ng-template" ng-controller="ModalSearchController">
-  <ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">My Saved Search</h1>
-    </ion-header-bar>
-    <ion-content>
-        <div ng-controller="SaveSearchController">
-            <div ng-show="all" >Search On All hashtags</div>
-            <div ng-hide="all"class="row row-center" ng-repeat="row in rows">
-                 <div class="col" ng-repeat="hashtag in row" class="item-button-right">
-                    {{ hashtag }}
-                    <button class="button button-small" ng-click="remove(hashtag)" >
-                        <i class="icon ion-close" alt="remove" ></i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <button class="button" ng-click="setAll()">Search for all hashtags</button>
-            </div>
-            <div class="row">
-                <button class="button" ng-click="saveSearch()">Save The Search</button>
-            </div>
-           <ion-list>
-                <ion-item ng-repeat="hashtag in hashtags" ng-show="showAdd(hashtag)" >
-                        {{ hashtag }}
-                        <button class="button ion-icon-left item-button-left" ng-click="add(hashtag)" >
-                            <i class="icon ion-checkmark" alt="Add to favorite search">Add</i>
-                        </button>
-                </ion-item>
-            </ion-list>
-        </div>                   
-    </ion-content>
-</ion-modal-view>
-</script>
 

@@ -53,6 +53,7 @@
     <script type="text/javascript" src="lib/angular-md5/angular-md5.js"></script>
     <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
     <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.js"></script>
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
     <script src="js/index.js"></script>
@@ -68,15 +69,19 @@
                 <button ui-sref="home" class="button button-light">Add</button>
                 <button ui-sref="search" class="button button-light">Search</button>
                 <button ui-sref="reserved" class="button button-light">Reserved</button>
+                <button class="button icon ion-navicon" ng-click="rightMenu()"></button>
             </div>
         </ion-header-bar>
         <ion-content class="has-header">
             <message></message>
             <div ui-view="center"></div>
-        </ion-content>
+      </ion-content>
       </ion-side-menu-content>
       <ion-side-menu side="left">
         <div ui-view="left"></div>
+      </ion-side-menu>
+      <ion-side-menu side="right">
+            <div ui-view="right">
       </ion-side-menu>
     </ion-side-menus>
   </body>

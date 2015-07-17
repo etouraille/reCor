@@ -7,7 +7,8 @@ var app = angular.module('resourceApp', [
     'ionic',
     'angular-md5', 
     'ngCookies', 
-    'ui.router'
+    'ui.router',
+    'ngCordova'
 ])
 
 .run([
@@ -41,20 +42,22 @@ app.config(['$httpProvider', function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor');
 }]);
 app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $urlRouterProvider ){
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/search');
 
     $stateProvider
-        .state('home',{
-            url : '/home',
+        .state('add',{
+            url : '/add',
             views : {
                 'center' : { templateUrl : 'view/home.html' },
-                'left' : { templateUrl : 'view/place.html' }
+                'left' : { templateUrl : 'view/place.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
         .state('reserved',{
             url : '/reserved',
             views : {
-                'center' : { templateUrl : 'view/reserved.html' }
+                'center' : { templateUrl : 'view/reserved.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
 
@@ -62,19 +65,22 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             url : '/search',
             views :{ 
                 'center' : { templateUrl : 'view/search.html' },
-                'left' : { templateUrl :   'view/resource.html' }    
+                'left' : { templateUrl :   'view/resource.html' },   
+                'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
         .state('login',{
             url : '/login',
             views : {
-                'center' : { templateUrl : 'view/login.html'}
+                'center' : { templateUrl : 'view/login.html'},
+                'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
         .state('subscribe',{
             url : '/subscribe',
             views : {
-                'center' : { templateUrl : 'view/subscribe.html' }
+                'center' : { templateUrl : 'view/subscribe.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
             }
         });
        

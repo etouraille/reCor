@@ -1,4 +1,3 @@
-'use strict';  
 
 app.controller('LoginController', ['$scope','$http', 'Authentication', '$state', function($scope,$http, Auth,$state){
 
@@ -8,12 +7,12 @@ app.controller('LoginController', ['$scope','$http', 'Authentication', '$state',
     $scope.login = function (){
         
         Auth.login($scope.user.username,$scope.user.password).then(function(){
-            $state.go('home');
+            $state.go('search');
         },function(reason){
             $scope.message = 'Login Failed'+reason;
             console.log('login failed'+ reason );
         });
         
-    }
+    };
 
-}])
+}]);
