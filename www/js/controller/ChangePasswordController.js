@@ -3,7 +3,8 @@ app.controller('ChangePasswordController', [
     '$http',
     'settings',
     '$state',
-    function($stateParams, $http, settings, $state ) {
+    '$scope',
+    function($stateParams, $http, settings, $state, $scope ) {
         $scope.changePassword = function(){
             
             $http.post(settings.endpoint + 'forgotten/changepassword', {
