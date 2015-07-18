@@ -84,6 +84,20 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'center' : { templateUrl : 'view/subscribe.html' },
                 'rigth' : { templatUrl : 'view/menu.html' }
             }
+        })
+        .state('createToken',{
+            url : '/forgotten',
+            views : {
+                'center' : { templateUrl : 'view/createToken.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
+            }
+        })
+        .state('changePassword',{
+            url : '/change-password?token',
+            views : {
+                'center' : { templateUrl : 'view/changePassword.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
+            }
         });
        
 }]);

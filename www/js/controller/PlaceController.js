@@ -37,6 +37,7 @@ app.controller('PlaceController',[
                 };
                 $http.post(settings.endpoint + 'logged-area/place/tag',place)
                 .success(function(data) {
+                    placeMongoFormat['id'] = data.id;
                     $rootScope.$broadcast('setPlace', placeMongoFormat );
                 });
             };
