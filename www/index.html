@@ -7,6 +7,7 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="lib/angular-material/angular-material.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then remove the CSS include above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -54,6 +55,9 @@
     <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
     <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="lib/angular-aria/angular-aria.js"></script>
+
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
     <script src="js/index.js"></script>
@@ -66,14 +70,13 @@
             <div class="title">#@T</div>
 
             <div class="buttons" ng-show="isLogged">
-                <button ui-sref="home" class="button button-light">Add</button>
+                <button ui-sref="add" class="button button-light">Add</button>
                 <button ui-sref="search" class="button button-light">Search</button>
                 <button ui-sref="reserved" class="button button-light">Reserved</button>
                 <button class="button icon ion-navicon" ng-click="rightMenu()"></button>
             </div>
         </ion-header-bar>
         <ion-content class="has-header">
-            <message></message>
             <div ui-view="center"></div>
       </ion-content>
       </ion-side-menu-content>

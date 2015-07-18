@@ -24,6 +24,33 @@ app.controller('AddController', [
 
     ];
 
+    //autocompletion of newspapers: 
+    
+    $scope.types  = settings.types.map(function(type) {
+        return {
+            value : type.toLowerCase(),
+            display : type
+        };
+    });
+
+    $scope.querySearch = function(query) {
+        return $scope.types.filter(createFilter(query));
+    };
+
+    $scope.item = {};
+
+    $scope.text = '';
+
+    function createFilter(query ) {
+        lowerCaseQuery = angular.lowercase(query);
+        return function filterFn(state) {
+            return (state.value.indexOf(lowerCaseQuery) === 0);
+        };
+    }
+
+
+    //end of autocompletion newspapers:
+
     $scope.place = {};
 
     $scope.$on('setPlace', function(event, data){
@@ -60,13 +87,19 @@ app.controller('AddController', [
 
     $scope.tag = function(){
         $rootScope.$broadcast('left',$scope.geo);
-    }
+    };
     
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/add';
-        
+        if($scope.item.value) {
+            var category = $scope.item.value;
+        } else {
+            var category = $scope.text;
+        }
         var data =  {
-                        'content': $scope.diese, 
+                        'content': settings.tag,
+                        'message' : $scope.message,
+                        'category' : category,
                         'lat': $scope.geo.lat, 
                         'lon' : $scope.geo.lng,
                         'endInterval' : $scope.endIntervalData.value,

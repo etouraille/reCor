@@ -8,7 +8,9 @@ var app = angular.module('resourceApp', [
     'angular-md5', 
     'ngCookies', 
     'ui.router',
-    'ngCordova'
+    'ngCordova',
+    'ngMaterial',
+    'ngAria',
 ])
 
 .run([
