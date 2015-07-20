@@ -23,7 +23,7 @@ app.directive('message',
                     $log.log('push event :  ' + JSON.stringify( args ) );
                     scope.$apply(function() {
                         scope.message = args.content;
-                        scope.count ++;
+                        scope.count = args.id;
                         scope.thereIsAMessage = true;
                     });
                 });

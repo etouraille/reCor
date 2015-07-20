@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" width="device-width" content="target-densitydpi=device-dpi" />
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -36,6 +37,7 @@
     <script type="text/javascript" src="js/controller/CreateTokenController.js"></script>
     <script type="text/javascript" src="js/controller/ChangePasswordController.js"></script>
     <script type="text/javascript" src="js/controller/MySearchController.js"></script>
+    <script type="text/javascript" src="js/controller/DetailController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
@@ -61,6 +63,7 @@
     <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
     <script type="text/javascript" src="lib/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
@@ -81,6 +84,7 @@
             </div>
         </ion-header-bar>
         <ion-content class="has-header">
+            <message></message>
             <div ui-view="center"></div>
       </ion-content>
       </ion-side-menu-content>
@@ -92,4 +96,4 @@
       </ion-side-menu>
     </ion-side-menus>
   </body>
-</html>
+  </html>

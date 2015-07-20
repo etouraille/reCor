@@ -85,6 +85,13 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
+        .state('detail',{
+            url : '/detail?id',
+            views : {
+                'center' : { templateUrl : 'view/detail.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
+            }
+        })
         .state('mySearch',{
             url : '/my-search',
             views : {

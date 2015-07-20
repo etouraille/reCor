@@ -11,6 +11,9 @@ app.controller('SearchController', [
     function($http, $scope, $rootScope, settings, localization, $log, $ionicModal, $state, $cordovaSplashscreen ) {
     
     //$cordovaSplashscreen.show();
+
+    var height = screen.height - 44 + 'px';
+    $('#map-canvas').css({ 'height' : height });
     
     $scope.options = [
         {value : '0.5km' , label : '500m'}, 

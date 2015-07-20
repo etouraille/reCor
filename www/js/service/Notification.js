@@ -4,7 +4,8 @@ app.factory('Notification',
             'settings', 
             '$log',
             '$rootScope',
-            function ($http, settings, $log, $rootScope ){
+            '$state',
+            function ($http, settings, $log, $rootScope, $state ){
     return {
             successHandler : function ( result ) {
                 $log.log(result);
@@ -37,13 +38,13 @@ app.factory('Notification',
                         $http.post(settings.endpoint + 'logged-area/notification/register',
                                    { device : 'android', regId : e.regid})
                                    .success(function(data){
-                                        $log.log('success' + data)
+                                        $log.log('success' + data);
                                         if(data.success) {    
                                             $rootScope.$broadcast('registered');
                                         }
                                    })
                                    .error(function(data){
-                                        $log.log('error ' + data)
+                                        $log.log('error ' + data);
                                    });
                     }
                 break;
@@ -73,8 +74,13 @@ app.factory('Notification',
                         {
                             $log.log('background');
                         }
+                        $state.go('detail' , { id : e.payload.id  });
                     }
-                    $rootScope.$broadcast('push', {type : 'classic', content : e.payload.message});
+                    $rootScope.$broadcast('push', {
+                        type : 'classic', 
+                        content : e.payload.message, 
+                        id : e.payload.id
+                    });
                     //Only works for GCM
                     //$rootScope.$broadcast('push', {type : 'gcm' , content : e.payload.msgcnt});
                     //

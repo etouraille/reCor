@@ -11,6 +11,7 @@
     "angular-ui-router": "~0.2.14",
     "ionicons": "~2.0.1",
     "ngCordova": "~0.1.17-alpha",
-    "angular-material": "~0.10.0"
+    "angular-material": "~0.10.0",
+    "angular-momentjs": "~0.2.2"
   }
 }

@@ -91,13 +91,13 @@ app.controller('AddController', [
     
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/add';
-        if($scope.item.value) {
+        if( $scope.item ) {
             var category = $scope.item.value;
         } else {
             var category = $scope.text;
         }
         var data =  {
-                        'content': settings.tag,
+                        'tag': settings.tag,
                         'message' : $scope.message,
                         'category' : category,
                         'lat': $scope.geo.lat, 
