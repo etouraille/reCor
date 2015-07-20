@@ -1,0 +1,28 @@
+<div ng-controller="MySearchController">
+   <form>
+        <div class="list">
+             <label class="item">
+                 <div class="input-label">
+                     Je Souhaite être prévenu
+                     des journeaux disponibles
+                 </div>
+            </label>
+             <label class="item item-input item-select">
+                 <div class="input-label">Dans un rayon de</div>
+                 <select ng-options="distance.label for distance in distances track by distance.value" ng-model="distance" ></select>
+             </label>
+            <label class="item item-input">
+                <div class="input-label">Autour de l'addresse</div>
+                <input type="text" lat="lat" lon="lon" location localization="localization" address="address" name="address" value="{{ address }}"/>
+
+            </label>
+            <label>
+                <button class="button" ng-click="update()">
+                    <span ng-show="creationMode">S'inscrire au notification</span>
+                    <span ng-hide="creationMode">Mettre à jour les notification</span>
+                </button>
+            </label>
+        </div>
+    </form>
+</div>
+

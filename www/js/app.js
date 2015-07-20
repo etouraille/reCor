@@ -85,6 +85,14 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
+        .state('mySearch',{
+            url : '/my-search',
+            views : {
+                'center' : { templateUrl : 'view/mySearch.html' },
+                'rigth' : { templatUrl : 'view/menu.html' }
+            }
+        })
+
         .state('createToken',{
             url : '/forgotten',
             views : {

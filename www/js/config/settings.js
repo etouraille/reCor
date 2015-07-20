@@ -6,6 +6,13 @@ app.constant('settings', {
     endpoint : 'http://resource/app_dev.php/',
     cdn : 'http://fanny.objetspartages.org/',
     androidProjectNumber : '672537723017', 
+    distances : [
+        { value : '500', label : '500m'  },
+        { value : '1000' , label : '1km' },
+        { value : '2000',  label : '2km' }, 
+        { value : '10000', label : '10km'},
+        { value : '100000', label : '100km' }
+    ],
     types : [ 
         'Libération',
         'Le Monde',
