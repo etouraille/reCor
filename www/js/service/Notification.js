@@ -79,7 +79,7 @@ app.factory('Notification',
                     $rootScope.$broadcast('push', {
                         type : 'classic', 
                         content : e.payload.message, 
-                        id : e.payload.id
+                        from : e.payload.from
                     });
                     //Only works for GCM
                     //$rootScope.$broadcast('push', {type : 'gcm' , content : e.payload.msgcnt});

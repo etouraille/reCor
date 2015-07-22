@@ -99,7 +99,13 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'rigth' : { templatUrl : 'view/menu.html' }
             }
         })
-
+        .state('chat',{
+            url : '/chat?to',
+            views : {
+                'center' : { templateUrl : 'view/chat.html' },
+                'footer' : { templateUrl : 'view/chatFooter.html' }
+            }
+        })
         .state('createToken',{
             url : '/forgotten',
             views : {

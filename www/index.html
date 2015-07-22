@@ -6,13 +6,10 @@
     <meta name="viewport" width="device-width" content="target-densitydpi=device-dpi" />
     <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     <link href="lib/angular-material/angular-material.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then remove the CSS include above
+    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -38,6 +35,7 @@
     <script type="text/javascript" src="js/controller/ChangePasswordController.js"></script>
     <script type="text/javascript" src="js/controller/MySearchController.js"></script>
     <script type="text/javascript" src="js/controller/DetailController.js"></script>
+    <script type="text/javascript" src="js/controller/ChatController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
@@ -52,6 +50,7 @@
     <script type="text/javascript" src="js/directive/Notification.js"></script>
     <script type="text/javascript" src="js/directive/Message.js"></script>
     <script type="text/javascript" src="js/directive/Location.js"></script>
+    <script type="text/javascript" src="js/directive/ChatInputDirective.js"></script>
 
     <!-- configuration -->
     <script type="text/javascript" src="js/config/settings.js"></script>
@@ -70,7 +69,8 @@
     <script src="js/index.js"></script>
     </head>
 
-  <body notification id="notification" >
+  <body notification id="notification" ng-controller="ChatController" >
+    <ion-pane class="messaging-view">
     <ion-side-menus>
       <ion-side-menu-content ng-controller="ionSideMenus">
         <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced"  ng-controller="HeaderController">
@@ -92,8 +92,10 @@
         <div ui-view="left"></div>
       </ion-side-menu>
       <ion-side-menu side="right">
-            <div ui-view="right">
+        <div ui-view="right"></div>
       </ion-side-menu>
     </ion-side-menus>
+    <div ui-view="footer"></div>
+    </ion-pane>
   </body>
   </html>
