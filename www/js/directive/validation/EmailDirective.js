@@ -2,7 +2,6 @@ app.directive('emailexists', ['$q', 'settings','$log','$http', function($q, conf
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
-        $log.log('email');
       ctrl.$asyncValidators.emailexists = function(modelValue, viewValue) {
 
         if (ctrl.$isEmpty(modelValue)) {

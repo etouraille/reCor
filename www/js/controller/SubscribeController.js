@@ -1,12 +1,12 @@
-'use strict';  
-
 app.controller('SubscribeController', [
     '$scope',
     '$http', 
     'settings',
     '$log',
     'AuthStorage', 
-    '$state', function($scope,$http, settings,$log, storage, $state){
+    '$state', 
+    'Authentication',
+    function($scope,$http, settings,$log, storage, $state, auth ){
 
     $scope.user = {username : '', email : '', password1 : '', password2 : '' };
     $scope.error = false;
@@ -18,11 +18,8 @@ app.controller('SubscribeController', [
         .success(function(data){
             if(data.success){
                 $log.log('User creation OK');
-                storage.persist(
-                    $scope.user.email, 
-                    $scope.user.password1, 
-                    data.message.salt
-                );
+                auth.login($scope.user.email, $scope.user.password1);
+                // todo redirect realy to search
                 $state.go('search');
             }else{
                 $log.log('problème while user creation');

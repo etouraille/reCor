@@ -12,28 +12,30 @@ app.factory('AuthInterceptor',
     'request': function(config) {
       // for none logged area return noting
       // we are in logged area/
-      if(config.url.match(/logged\-area/)) { 
-          //When we do the ping on login
-          if('x-wsse' in config.headers) {
+      if(typeof config !== 'undefined') {
+          if(config.url.match(/logged\-area/)) { 
+              //When we do the ping on login
+              if('x-wsse' in config.headers) {
+                return config;
+              }
+              // If the user authentication data are in storage.
+              else if(typeof storage.get() === 'object') {
+                var AuthData = storage.get();
+                 config.headers['x-wsse'] = Encryption.getWsseHeader(
+                     AuthData.login, 
+                     AuthData.password,
+                     AuthData.salt
+                 );
+                 return config;
+              }
+              // is the user is not logged, we redirect to login page
+              else {
+                $injector.get('Authentication').redirectToLogin();
+              }
+          } else { // especially in subscribe form, not in a logged area
             return config;
           }
-          // If the user authentication data are in storage.
-          else if(typeof storage.get() === 'object') {
-            var AuthData = storage.get();
-             config.headers['x-wsse'] = Encryption.getWsseHeader(
-                 AuthData.login, 
-                 AuthData.password,
-                 AuthData.salt
-             );
-             return config;
-          }
-          // is the user is not logged, we redirect to login page
-          else {
-            $injector.get('Authentication').redirectToLogin();
-          }
-      } else { // especially in subscribe form, not in a logged area
-        return config;
-      }
+        }
     },
 
     // optional method

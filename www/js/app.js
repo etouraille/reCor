@@ -52,14 +52,14 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             views : {
                 'center' : { templateUrl : 'view/home.html' },
                 'left' : { templateUrl : 'view/place.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('reserved',{
             url : '/reserved',
             views : {
                 'center' : { templateUrl : 'view/reserved.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
 
@@ -68,56 +68,65 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             views :{ 
                 'center' : { templateUrl : 'view/search.html' },
                 'left' : { templateUrl :   'view/resource.html' },   
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('login',{
             url : '/login',
             views : {
                 'center' : { templateUrl : 'view/login.html'},
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('subscribe',{
             url : '/subscribe',
             views : {
                 'center' : { templateUrl : 'view/subscribe.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('detail',{
             url : '/detail?id',
             views : {
                 'center' : { templateUrl : 'view/detail.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('mySearch',{
             url : '/my-search',
             views : {
                 'center' : { templateUrl : 'view/mySearch.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('chat',{
             url : '/chat?to',
             views : {
                 'center' : { templateUrl : 'view/chat.html' },
-                'footer' : { templateUrl : 'view/chatFooter.html' }
+                'footer' : { templateUrl : 'view/chatFooter.html' },
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
+        .state('conversation',{
+            url : '/conversation',
+            views : {
+                'center' : { templateUrl : 'view/conversation.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+
         .state('createToken',{
             url : '/forgotten',
             views : {
                 'center' : { templateUrl : 'view/createToken.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('changePassword',{
             url : '/change-password?token',
             views : {
                 'center' : { templateUrl : 'view/changePassword.html' },
-                'rigth' : { templatUrl : 'view/menu.html' }
+                'right' : { templateUrl : 'view/menu.html' }
             }
         });
        
