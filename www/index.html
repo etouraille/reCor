@@ -38,13 +38,16 @@
     <script type="text/javascript" src="js/controller/ChatController.js"></script>
     <script type="text/javascript" src="js/controller/ConversationController.js"></script>
     <script type="text/javascript" src="js/controller/MenuController.js"></script>
+    <script type="text/javascript" src="js/controller/NotificationController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
     <script type="text/javascript" src="js/service/AuthStorage.js"></script>
     <script type="text/javascript" src="js/service/AuthInterceptor.js"></script>
     <script type="text/javascript" src="js/service/Localization.js"></script>
+    <script type="text/javascript" src="js/service/NotificationStorage.js"></script>
     <script type="text/javascript" src="js/service/Notification.js"></script>
+
     <!--directive -->
     <script type="text/javascript" src="js/directive/validation/EmailDirective.js"></script>
     <script type="text/javascript" src="js/directive/validation/CompareDirective.js"></script>
@@ -53,6 +56,7 @@
     <script type="text/javascript" src="js/directive/Message.js"></script>
     <script type="text/javascript" src="js/directive/Location.js"></script>
     <script type="text/javascript" src="js/directive/ChatInputDirective.js"></script>
+    <script type="text/javascript" src="js/directive/Alert.js"></script>
 
     <!-- configuration -->
     <script type="text/javascript" src="js/config/settings.js"></script>
@@ -79,6 +83,7 @@
             <div class="title">#@T</div>
 
             <div class="buttons" ng-show="isLogged">
+                <alert></alert>
                 <button ui-sref="add" class="button button-light">Add</button>
                 <button ui-sref="search" class="button button-light">Search</button>
                 <button ui-sref="reserved" class="button button-light">Reserved</button>

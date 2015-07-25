@@ -85,10 +85,17 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'right' : { templateUrl : 'view/menu.html' }
             }
         })
-        .state('detail',{
-            url : '/detail?id',
+        .state('around',{
+            url : '/around?id',
             views : {
                 'center' : { templateUrl : 'view/detail.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('notification',{
+            url : '/notification',
+            views : {
+                'center' : { templateUrl : 'view/notification.html' },
                 'right' : { templateUrl : 'view/menu.html' }
             }
         })
@@ -129,6 +136,5 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'right' : { templateUrl : 'view/menu.html' }
             }
         });
-       
 }]);
 

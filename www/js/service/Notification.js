@@ -5,7 +5,8 @@ app.factory('Notification',
             '$log',
             '$rootScope',
             '$state',
-            function ($http, settings, $log, $rootScope, $state ){
+            'NotificationStorage',
+            function ($http, settings, $log, $rootScope, $state, storage ){
     return {
             successHandler : function ( result ) {
                 $log.log(result);
@@ -74,12 +75,16 @@ app.factory('Notification',
                         {
                             $log.log('background');
                         }
-                        $state.go('detail' , { id : e.payload.id  });
+                        store.add({
+                            type : e.payload.type, 
+                            content : e.payload.message,
+                            id : e.payload.id
+                        });
                     }
                     $rootScope.$broadcast('push', {
-                        type : 'classic', 
+                        type : e.payload.type, 
                         content : e.payload.message, 
-                        from : e.payload.from
+                        id : e.payload.id
                     });
                     //Only works for GCM
                     //$rootScope.$broadcast('push', {type : 'gcm' , content : e.payload.msgcnt});

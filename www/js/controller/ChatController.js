@@ -3,19 +3,22 @@ app.controller('ChatController',[
         '$timeout',
         '$ionicScrollDelegate',
         '$stateParams',
+        '$state',
         '$http',
         'settings',
         'AuthStorage',
         '$window',
-        function($scope, $timeout, $ionicScrollDelegate, $stateParams, $http, settings, auth, $window ) {
+        '$log',
+        function($scope, $timeout, $ionicScrollDelegate, $stateParams, $state,  $http, settings, auth, $window, $log ) {
        
         // init
-        
-            $scope.me = $window.localStorage.getItem('id');
+        // todo edit AuthStorage with $window
+        $scope.me = $window.localStorage.getItem('id');
         
         $scope.messages = [];
         $scope.$watch(
             function(){
+                $log.log('stateParams', $state);
                 return $stateParams.to;
             }, function(to){
             if(to){
@@ -30,14 +33,16 @@ app.controller('ChatController',[
         });
 
         $scope.$on('push', function(event, args){
-            $log.log('push');
-            if(args.from){
-                var d = new Date();
-                d = d.toLocalTimeString().replace(/:\d+ /, ' ');
-                $scope.messages.push({
-                    from : args.from,
-                    content : args.content,
-                    timestamp : d
+            $log.log('push', args );
+            $log.log( $scope.to );
+            if(args.id === $scope.to && args.type === 'message' ){
+                $log.log('add message');
+                $scope.$apply(function() {
+                    $scope.messages.push({
+                        from : args.from,
+                        content : args.content
+                    });
+                    $ionicScrollDelegate.scrollBottom(true);
                 });
             }
         });
@@ -47,12 +52,11 @@ app.controller('ChatController',[
         isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
 
       $scope.sendMessage = function() {
-         var d = new Date();
-         d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
+         //var d = new Date();
+         //d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
          $scope.messages.push({
              from: $scope.me,
-             content: $scope.data.message,
-             timestamp: d
+             content: $scope.data.message
          });
          $http.post(settings.endpoint + 'logged-area/send/message',{
              to : $scope.to , 
