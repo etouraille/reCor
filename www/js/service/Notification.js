@@ -75,12 +75,14 @@ app.factory('Notification',
                         {
                             $log.log('background');
                         }
-                        store.add({
+                        storage.add({
                             type : e.payload.type, 
                             content : e.payload.message,
                             id : e.payload.id
                         });
+
                     }
+                    $log.log('push', JSON.stringify(e));
                     $rootScope.$broadcast('push', {
                         type : e.payload.type, 
                         content : e.payload.message, 

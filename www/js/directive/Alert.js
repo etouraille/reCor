@@ -22,13 +22,13 @@ app.directive('alert',
                 }
                 scope.$on('push', function(event, args ) {
                     // we add notification if we are not on the chat page
-                    if(args.type !== 'pneumatique' 
-                       && $state.current.name !== 'chat' 
-                       && $state.params.to !== args.id
+                    $log.log('push on alert directive', JSON.stringify(args));
+                    if( $state.current.name !== 'chat' 
+                        && $state.params.to !== args.id
                       ) {
                         scope.$apply(function() {
                             scope.message = args.content;
-                            scope.count++;
+                            scope.count = scope.count +1 ;
                             scope.thereAreNotifications = true;
                             storage.add(
                                 {type : args.type, id : args.id , content : args.content  }

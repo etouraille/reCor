@@ -7,6 +7,8 @@ app.constant('settings', {
     endpoint : 'http://resource.objetspartages.org/app_dev.php/',
     cdn : 'http://fanny.objetspartages.org/',
     androidProjectNumber : '672537723017', 
+    messageType : 'pneumatique',
+    chatType : 'chat',
     distances : [
         { value : '500', label : '500m'  },
         { value : '1000' , label : '1km' },
