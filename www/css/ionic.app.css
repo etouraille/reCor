@@ -7739,11 +7739,11 @@ a.button {
   -webkit-transform: translate3d(120px, 0, 0) !important;
   -moz-transform: translate3d(120px, 0, 0) !important;
   transform: translate3d(120px, 0, 0) !important; }
-.messages.other span {
+.messages.other .message span {
   color: black !important;
   background-color: #C7C7CC !important; }
 
-span {
+.message span {
   background: #007AFF !important;
   display: inline-block !important;
   color: white !important;

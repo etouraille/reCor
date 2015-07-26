@@ -65,24 +65,27 @@ app.controller('AddController', [
         $scope.picture = false;
         navigator.camera.getPicture(function(imageData){
             $scope.disabled = true;
-            $http.post('http://fanny.objetspartages.org/put', {content : imageData })
-            .success(function(data){
+            $http.post(settings.cdn + 'put', {content : imageData })
+            .success( function(data) {
+                $log.log('success uploading the picture with data' + JSON.stringify(data));
                 $scope.picture = data.id;
                 $scope.disabled = false;
+
             })
-            .error(function(data){
-                $log.log('Error Uploading file : '+ data );
+            .error(function(data) {
+                $log.log('Error Uploading file : '+ JSON.stringify(data) );
                 $scope.disabled = false;
             });
-        }, function(message){
+        }, function(message) {
             $log.log('Failed camera because: '+ message );
             $scope.error = 'Failed Camera' + message;
-            $scope.disabled = false;
+            $scope.$apply( function() {
+                $scope.disabled = false;
+            });
         }, { 
             quality: 50,
             destinationType: Camera.DestinationType.DATA_URL
         });
-
     };
 
     $scope.tag = function(){
@@ -91,10 +94,11 @@ app.controller('AddController', [
     
     $scope.submit = function(){
         var url = settings.endpoint + 'logged-area/add';
+        var category = '';
         if( $scope.item ) {
-            var category = $scope.item.value;
+            category = $scope.item.value;
         } else {
-            var category = $scope.text;
+            category = $scope.text;
         }
         var data =  {
                         'tag': settings.tag,
@@ -106,7 +110,7 @@ app.controller('AddController', [
                         'place' : $scope.place
         };
         if($scope.picture){
-                data['picture'] = $scope.picture;
+                data.picture = $scope.picture;
             }
 
             $http.post(url, data

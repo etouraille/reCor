@@ -18,6 +18,12 @@ app.directive('alert',
                 if (notifications === false) {
                     scope.thereAreNotifications = false;
                 } else {
+                    angular.forEach(notification, function(notification,id) {
+                        if(notification.read === false){
+                            scope.count = scope.count + 1;
+                        }
+                    });
+
                     scope.count = notifications.length;
                 }
                 scope.$on('push', function(event, args ) {

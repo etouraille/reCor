@@ -12,11 +12,17 @@ app.controller('ConversationController', [
                 $scope.conversations = data.conversations;
                 angular.forEach($scope.conversations , function(conversation, id ){
                     if(conversation.to == $scope.me) {
-                        $scope.conversations[id]['refTo'] = conversation.from;
+                        $scope.conversations[id].refTo = conversation.from;
+                        $scope.conversations[id].protagoniste = conversation.fromName;
                     }
                     if(conversation.from == $scope.me) {
-                        $scope.conversations[id]['refTo'] = conversation.to;
+                        $scope.conversations[id].refTo = conversation.to;
+                        $scope.conversations[id].protagoniste = conversation.toName;
                     }
+                    var lastMessage = $scope.conversations[id].messages[
+                        $scope.conversations[id].messages.length - 1
+                    ].content;
+                    $scope.conversations[id].lastMessage = lastMessage;
                 });
             }
         });

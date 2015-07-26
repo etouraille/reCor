@@ -15,14 +15,20 @@ app.controller('ChatController',[
         // todo edit AuthStorage with $window
         $scope.me = $window.localStorage.getItem('id');
         
+        $scope.isChat = false;
         $scope.messages = [];
+        $ionicScrollDelegate.scrollBottom(true);
         $scope.$watch(
             function(){
-                $log.log('stateParams', $state);
                 return $stateParams.to;
             }, function(to){
             if(to){
                 $scope.to = to;
+                if(
+                    typeof $stateParams.current !== 'undefined' 
+                    && $stateParams.current.name === 'chat') {
+                        scope.isChat = true;
+                }
                 $http.post(settings.endpoint + 'logged-area/conversation', {to : $scope.to})
                 .success(function(data) {
                     if(data.success){
@@ -46,25 +52,24 @@ app.controller('ChatController',[
                 });
             }
         });
-      $scope.hideTime = true;
+        $scope.hideTime = true;
 
-      var alternate,
         isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
 
-      $scope.sendMessage = function() {
-         //var d = new Date();
-         //d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
-         $scope.messages.push({
-             from: $scope.me,
-             content: $scope.data.message
-         });
-         $http.post(settings.endpoint + 'logged-area/send/message',{
-             to : $scope.to , 
-             content : $scope.data.message
-         });
-         delete $scope.data.message;
-         $ionicScrollDelegate.scrollBottom(true);
-      };
+        $scope.sendMessage = function() {
+            //var d = new Date();
+            //d = d.toLocaleTimeString().replace(/:\d+ /, ' ');
+            $scope.messages.push({
+                 from: $scope.me,
+                 content: $scope.data.message
+            });
+            $http.post(settings.endpoint + 'logged-area/send/message',{
+                to : $scope.to , 
+                content : $scope.data.message
+            });
+            delete $scope.data.message;
+            $ionicScrollDelegate.scrollBottom(true);
+        };
 
 
   $scope.inputUp = function() {

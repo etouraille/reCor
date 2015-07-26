@@ -1,6 +1,6 @@
 <div class="list" ng-controller="ConversationController">
     <span class="item item-button" ng-repeat="conversation in conversations">
-        <div class="item-input">Entre : {{ conversation.fromName }} et : {{ conversation.toName }}</div>
+        <div class="item-input">{{ conversation.protagoniste }} : {{ conversation.lastMessage }}</div>
         <button class="button" ui-sref="chat({ to : conversation.refTo })">Rejoindre</button> 
     </span>
 </div>
