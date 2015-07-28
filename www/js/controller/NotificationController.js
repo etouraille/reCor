@@ -5,7 +5,7 @@ app.controller('NotificationController',[
     '$state',
     'settings',
     function($rootScope, $scope, storage, $state, settings) {
-        $scope.notifications = storage.get();
+        $scope.notifications = storage.getFormated();
     
         $scope.go = function(idNotification,notification) {
             $rootScope.$broadcast('removenotification');
@@ -14,7 +14,7 @@ app.controller('NotificationController',[
                 $state.go('chat', {'to': notification.id})
             }
             if(notification.type === 'around'){
-                $state.go('around', {id : notification.id });
+                $state.go('around', {'id' : notification.id });
             }
         };
     }

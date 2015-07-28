@@ -82,7 +82,7 @@ app.factory('Notification',
                         });
 
                     }
-                    $log.log('push', JSON.stringify(e));
+                    $log.log('push'+  JSON.stringify(e));
                     $rootScope.$broadcast('push', {
                         type : e.payload.type, 
                         content : e.payload.message, 

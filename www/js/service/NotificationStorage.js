@@ -1,6 +1,7 @@
 app.factory('NotificationStorage', [
-    '$window', 
-    function ($window){
+    '$window',
+    'settings',
+    function ($window, settings ){
     return {
             get : function() {
                 /*
@@ -15,7 +16,7 @@ app.factory('NotificationStorage', [
             },
             add : function( notification ) {
                 var notifications = this.get();
-                notification['read'] = false;
+                notification.read = false;
                 if(notifications !== false){
                     notifications.push(notification);
                 } else {
@@ -31,8 +32,46 @@ app.factory('NotificationStorage', [
             },
             setRead : function(id){
                 notifications = this.get();
-                notifications[id]['read'] = true;
+                notifications[id].read = true;
                 this.set(notifications);
+            },
+            getFormated : function () {
+                notifications = this.get();
+                var ret = [];
+                if(notifications !== false ) {
+                    notifications = notifications.reverse();
+                    groupedMessage = this.groupSameMessageKeys(notifications);
+
+                    angular.forEach( notifications , function(notification, id) {
+                        if(notifications.type === settings.messageType ) {
+                            if(id === Object.keys(
+                                groupedMessage[notification.id]
+                                )[0]) {
+                                    ret.push(notification);
+                              }
+                        } else {
+                            ret.push(notification);
+                        }  
+                    });
+                }
+                return ret;
+            },
+            groupSameMessageKeys : function (notifications ) {
+                var keys = [];
+                /*
+                 *  keys = idNotif=>[id1, id2, id3] 
+                 */
+                angular.forEach(notifications, function(notification, id ) {
+                    if( notification.type === settings.messageType) {
+                        if(typeof keys[notification.id] === 'undefined' || keys[notification.id] === null) {
+                            keys[notification.id] = [id];
+                        }else if(keys[notification.id].indexOf(id) === -1 ){
+                            keys[notification.id].push(id)
+                        }
+                    }
+                });
+                return keys;
             }
+            
     };
 }]);

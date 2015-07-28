@@ -9,6 +9,7 @@ app.constant('settings', {
     androidProjectNumber : '672537723017', 
     messageType : 'pneumatique',
     chatType : 'chat',
+    aroundType : 'around',
     distances : [
         { value : '500', label : '500m'  },
         { value : '1000' , label : '1km' },

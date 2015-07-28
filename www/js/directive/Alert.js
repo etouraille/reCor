@@ -18,7 +18,7 @@ app.directive('alert',
                 if (notifications === false) {
                     scope.thereAreNotifications = false;
                 } else {
-                    angular.forEach(notification, function(notification,id) {
+                    angular.forEach(notifications, function(notification,id) {
                         if(notification.read === false){
                             scope.count = scope.count + 1;
                         }
@@ -28,7 +28,7 @@ app.directive('alert',
                 }
                 scope.$on('push', function(event, args ) {
                     // we add notification if we are not on the chat page
-                    $log.log('push on alert directive', JSON.stringify(args));
+                    $log.log('push on alert directive' + JSON.stringify(args));
                     if( $state.current.name !== 'chat' 
                         && $state.params.to !== args.id
                       ) {

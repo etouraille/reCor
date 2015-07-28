@@ -1,4 +1,5 @@
 app.controller('ChatController',[ 
+        
         '$scope',
         '$timeout',
         '$ionicScrollDelegate',
@@ -38,9 +39,8 @@ app.controller('ChatController',[
             }
         });
 
-        $scope.$on('push', function(event, args){
+        $scope.$on('push', function(event, args) {
             $log.log('push', args );
-            $log.log( $scope.to );
             if(args.id === $scope.to && args.type === settings.messageType ){
                 $log.log('add message');
                 $scope.$apply(function() {
