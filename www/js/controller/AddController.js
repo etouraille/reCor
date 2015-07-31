@@ -101,7 +101,7 @@ app.controller('AddController', [
             category = $scope.text;
         }
         var data =  {
-                        'tag': settings.tag,
+                        'tag': $scope.tag,
                         'message' : $scope.message,
                         'category' : category,
                         'lat': $scope.geo.lat, 
