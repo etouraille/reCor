@@ -4,6 +4,10 @@
             <span>Getting geo location ...</span>
         </label>
         <label class="item item-input">
+            <input type="text" ng-model="tag" placeholder="#tag" name="hashtag" hashtag/>
+            <span ng-show="form.hashtag.$error.hashtag">Must Not Contain Blancks</span>
+        </label>
+        <label class="item item-input">
             <md-autocomplete
               ng-disabled="false"
               md-no-cache="false"
