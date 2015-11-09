@@ -45,6 +45,9 @@
                 <button class="button" ng-click="saveSearch()">Save The Search</button>
             </div>
            <ion-list>
+                <ion-item>
+                    <input ion-autocomplete ng-model="model" type="text" class="ion-autocomplete" autocomplete="off" items-method="callbackMethod(query)"/>
+                </ion-item>
                 <ion-item ng-repeat="hashtag in hashtags" ng-show="showAdd(hashtag)" >
                         {{ hashtag }}
                         <button class="button ion-icon-left item-button-left" ng-click="add(hashtag)" >
@@ -56,4 +59,5 @@
     </ion-content>
 </ion-modal-view>
 </script>
-
+<!-- toute resource qui a été définie une fois dans le commun est disponible pour toute recherche -->
+<!-- une resource, mot unique peut être localisée a plusieurs endroits -->
