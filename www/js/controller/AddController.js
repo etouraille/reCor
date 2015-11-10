@@ -36,25 +36,27 @@ app.controller('AddController', [
     $scope.addPicture = function(){
         $scope.disabled = true;
         $scope.picture = false;
-        navigator.camera.getPicture(function(imageData){
-            $scope.disabled = true;
-            $http.post('http://fanny.objetspartages.org/put', {content : imageData })
-            .success(function(data){
-                $scope.picture = data.id;
+        if(navigator.camera !== undefined ) {
+            navigator.camera.getPicture(function(imageData){
+                $scope.disabled = true;
+                $http.post('http://fanny.objetspartages.org/put', {content : imageData })
+                .success(function(data){
+                    $scope.picture = data.id;
+                    $scope.disabled = false;
+                })
+                .error(function(data){
+                    $log.log('Error Uploading file : '+ data );
+                    $scope.disabled = false;
+                });
+            }, function(message){
+                $log.log('Failed camera because: '+ message );
+                $scope.error = 'Failed Camera' + message;
                 $scope.disabled = false;
-            })
-            .error(function(data){
-                $log.log('Error Uploading file : '+ data );
-                $scope.disabled = false;
+            }, { 
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL
             });
-        }, function(message){
-            $log.log('Failed camera because: '+ message );
-            $scope.error = 'Failed Camera' + message;
-            $scope.disabled = false;
-        }, { 
-            quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL
-        });
+        }
 
     };
 

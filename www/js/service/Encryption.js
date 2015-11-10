@@ -30,8 +30,8 @@ app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $l
             else{
                 date = new Date();
                 var microseconds = date.getTime();
-                var userOffset = date.getTimezoneOffset()*60000;
-                date = new Date(microseconds + userOffset + 2*60*60000);
+                var userOffset = date.getTimezoneOffset() * 60000;
+                date = new Date(microseconds + userOffset + 1*60*60000);
             }
             function addZero(integer){
                 if(integer < 10){
