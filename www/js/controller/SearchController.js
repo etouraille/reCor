@@ -52,11 +52,8 @@ app.controller('SearchController', [
         
 
     };
-
-    $scope.callbackMethod = function(query) {
-        return 'toto';
-    }
-    $scope.map =function(lat, long, results){
+    
+    $scope.map = function(lat, long, results ) {
        $log.log('lat'+lat+'long'+long);
        lat = parseFloat(lat);
        long = parseFloat(long);

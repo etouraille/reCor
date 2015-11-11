@@ -5,7 +5,8 @@ app.controller('SaveSearchController', [
     'settings',
     '$ionicPopup',
     '$log',
-    function($http, $scope, $rootScope, settings,$ionicPopup, $log) {
+    'settings',
+    function($http, $scope, $rootScope, settings,$ionicPopup, $log, settings ) {
         
         $scope.myHashtags = [];
         $scope.init = function(){
@@ -19,6 +20,15 @@ app.controller('SaveSearchController', [
             });
         };
 
+        $scope.initial = 'a';
+        $scope.$watch(function(){ return $scope.initial}, function(){ 
+            $http.post( settings.endpoint + 'logged-area/autocomplete', { letters : $scope.initial}).success(function(data){
+                    $log.log(data);
+                    $scope.propositions = data;
+            });
+        }).error(function(data){ $log.log(data)});
+ 
+        
         $scope.all = false;
 
         $scope.setAll = function() {
@@ -58,7 +68,7 @@ app.controller('SaveSearchController', [
         function group(){
             $scope.rows = [];
             $scope.rows[0] = [];
-            var k=0;
+            var k=0
             var j=0;
             for(var i in $scope.myHashtags) {
                 if(j<4){

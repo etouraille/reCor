@@ -1,7 +1,9 @@
 app.controller('ModalSearchController', [
         '$ionicModal',
         '$scope',
-         function($ionicModal, $scope){
+        '$http',
+        'settings',
+         function($ionicModal, $scope, $http, settings ){
      
       $ionicModal.fromTemplateUrl('save-search', {
         scope: $scope,
@@ -31,6 +33,6 @@ app.controller('ModalSearchController', [
       $scope.$on('modal.removed', function() {
         // Execute action
       });
-   
-                       
+
+                      
 }]);

@@ -13,7 +13,7 @@ app.controller('SubscribeController', [
 
 
     $scope.subscribe = function (){
-    
+   
         $http.post(settings.endpoint + 'subscribe', $scope.user )
         .success(function(data){
             if(data.success){

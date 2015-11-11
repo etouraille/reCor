@@ -7,7 +7,7 @@ var app = angular.module('resourceApp', [
     'ionic',
     'angular-md5', 
     'ngCookies', 
-    'ui.router'
+    'ui.router',
 ])
 
 .run([
