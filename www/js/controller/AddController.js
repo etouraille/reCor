@@ -68,7 +68,8 @@ app.controller('AddController', [
         var url = settings.endpoint + 'logged-area/add';
         
         var data =  {
-                        'content': $scope.diese, 
+                        'tag': $scope.diese,
+                        'category': '',
                         'lat': $scope.geo.lat, 
                         'lon' : $scope.geo.lng,
                         'endInterval' : $scope.endIntervalData.value,

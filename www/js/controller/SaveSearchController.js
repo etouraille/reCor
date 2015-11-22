@@ -21,12 +21,12 @@ app.controller('SaveSearchController', [
         };
 
         $scope.initial = 'a';
-        $scope.$watch(function(){ return $scope.initial}, function(){ 
+        $scope.$watch(function() { return $scope.initial }, function(){
             $http.post( settings.endpoint + 'logged-area/autocomplete', { letters : $scope.initial}).success(function(data){
                     $log.log(data);
                     $scope.propositions = data;
             });
-        }).error(function(data){ $log.log(data)});
+        });
  
         
         $scope.all = false;

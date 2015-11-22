@@ -90,7 +90,7 @@ app.factory('Authentication', [
     },
 
     unlog : function () {
-       $cookies.remove('auth'); 
+       AuthStorage.clean(); 
     }, 
     isLogged : function(){
         var userAuthObject = storage.get();

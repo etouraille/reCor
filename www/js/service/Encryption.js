@@ -40,7 +40,6 @@ app.factory('Encryption', ['md5','settings','$log', function( md5 , settings, $l
                 return ''+integer;
             }
             return addZero(date.getFullYear())+'-'+addZero(date.getMonth()+1)+'-'+addZero(date.getDate())+' '+addZero(date.getHours())+':'+addZero(date.getMinutes())+':'+addZero(date.getSeconds());
-            //return Moment.format();
         },
 
         getDigest : function(nonce, created,secret){

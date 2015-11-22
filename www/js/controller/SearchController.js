@@ -13,7 +13,8 @@ app.controller('SearchController', [
         {value : '0.5km' , label : '500m'}, 
         {value : '1km',  label : '1km' },
         {value : '2km' , label : '2km'},
-        { value : '10km', label : '10km'}
+        { value : '10km', label : '10km'},
+        { value : '1000km' , label : '1000km' }
     ];
 
     $scope.openModal = function() {
@@ -28,7 +29,7 @@ app.controller('SearchController', [
         $log.log('error localization', error );
     });
 
-    $scope.distance = $scope.options[3];
+    $scope.distance = $scope.options[4];
     $scope.results = [];
     $scope.submit = function(){
     var url = settings.endpoint + 'logged-area/search';

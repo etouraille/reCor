@@ -3,13 +3,15 @@ app.controller('PlaceController',[
     '$rootScope',
     '$http',
     'settings',
-    function($scope, $rootScope, $http, settings) {
+    '$log',
+    function($scope, $rootScope, $http, settings, $log) {
         $scope.$on('left', function(event, geo) { 
             $scope.places = [];
             $scope.myPlace = {};
             $http.post(settings.endpoint + 'place/search', geo)
             .success(function(data) {
-                if(typeof data.hits.hits != 'unedefined'){
+                $log.log(data);
+                if(typeof data.hits.hits != 'undefined'){
                     $scope.places = data.hits.hits;
                 }
             });
