@@ -5,8 +5,7 @@ app.controller('SaveSearchController', [
     'settings',
     '$ionicPopup',
     '$log',
-    'settings',
-    function($http, $scope, $rootScope, settings,$ionicPopup, $log, settings ) {
+    function($http, $scope, $rootScope, settings,$ionicPopup, $log ) {
         
         $scope.myHashtags = [];
         $scope.init = function(){
@@ -20,16 +19,21 @@ app.controller('SaveSearchController', [
             });
         };
 
-        $scope.initial = 'a';
-        $scope.$watch(function() { return $scope.initial }, function(){
-            $http.post( settings.endpoint + 'logged-area/autocomplete', { letters : $scope.initial}).success(function(data){
-                    $log.log(data);
-                    $scope.propositions = data;
-            });
-        });
- 
-        
+                
         $scope.all = false;
+        $scope.$watch(function(){return $scope.initial;},function(letters){
+           $scope.$apply(function(){
+                $http.post(settings.endpoint + 'logged-area/autocomplete', {letters : letters})
+                .success(function(data){
+                    $log.log('cat');
+                    $log.log(data);     
+                })
+                .error(function(data) {
+                    $log.log(data);
+                    $log.log('dog');
+                })
+           });
+        });
 
         $scope.setAll = function() {
             $scope.myHashtags = [];

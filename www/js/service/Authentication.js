@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Authentication', [
+app.factory('Authentication',[ 
     '$log', 
     '$http', 
     'md5', 
@@ -11,8 +11,8 @@ app.factory('Authentication', [
     'AuthStorage',
     '$state',
     '$rootScope',
-    function($log, $http, md5, $cookieStore, $q , settings, encryption , storage, $state, $rootScope){
-    
+    function($log, $http, md5, $cookieStore, $q , settings, encryption , storage, $state, $rootScope) {
+     
     return {
 
     getSaltFromServer : function (username) {
@@ -21,6 +21,7 @@ app.factory('Authentication', [
         $http.post(settings.endpoint+'salt', {username : username})
             .success(function(data,err){
                 if(data.success) {
+                
                     deferred.resolve(data.salt);
                 } else {
                     deferred.reject(data.error);
@@ -90,9 +91,9 @@ app.factory('Authentication', [
     },
 
     unlog : function () {
-       AuthStorage.clean(); 
+       storage.clean(); 
     }, 
-    isLogged : function(){
+    isLogged : function() {
         var userAuthObject = storage.get();
         $log.log('useAuthObject', userAuthObject );
         if(typeof userAuthObject === 'object') { 
@@ -100,7 +101,6 @@ app.factory('Authentication', [
         } else { 
             return false;
         }
-    }
-
+     }
     };
 }]);

@@ -17,8 +17,6 @@ app.controller('SubscribeController', [
         $http.post(settings.endpoint + 'subscribe', $scope.user )
         .success(function(data){
             if(data.success){
-                $log.log('User creation OK');
-                $log.log('salt after login', JSON.stringify(data));
                 storage.persist(
                     $scope.user.email, 
                     $scope.user.password1, 
@@ -34,5 +32,4 @@ app.controller('SubscribeController', [
             $scope.error = true; // Substitute with event
         });
     };
-
-}]);
+ }]);

@@ -2,7 +2,7 @@
 
 app.controller('LoginController', ['$scope','$http', 'Authentication', '$state', function($scope,$http, Auth,$state){
 
-    $scope.user = {username : 'edouard' , password : 'b1otope', logged : 'not'};
+    $scope.user = {username : '' , password : '', logged : 'not'};
     $scope.message = '';
 
     $scope.login = function (){
