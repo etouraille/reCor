@@ -21,8 +21,10 @@ app.controller('SaveSearchController', [
 
                 
         $scope.all = false;
-        $scope.$watch(function(){return $scope.initial;},function(letters){
-           $scope.$apply(function(){
+        
+        $scope.$watch('initial',function(letters){
+            $log.log('cat')
+            $scope.$apply(function(){
                 $http.post(settings.endpoint + 'logged-area/autocomplete', {letters : letters})
                 .success(function(data){
                     $log.log('cat');
@@ -31,10 +33,9 @@ app.controller('SaveSearchController', [
                 .error(function(data) {
                     $log.log(data);
                     $log.log('dog');
-                })
+                });
            });
         });
-
         $scope.setAll = function() {
             $scope.myHashtags = [];
         };
@@ -72,7 +73,7 @@ app.controller('SaveSearchController', [
         function group(){
             $scope.rows = [];
             $scope.rows[0] = [];
-            var k=0
+            var k=0;
             var j=0;
             for(var i in $scope.myHashtags) {
                 if(j<4){

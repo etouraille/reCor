@@ -9,7 +9,6 @@ var app = angular.module('resourceApp', [
     'ngCookies', 
     'ui.router',
 ])
-
 .run([
     '$ionicPlatform',
     '$rootScope',
@@ -52,7 +51,7 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             }
         })
         .state('reserved',{
-            url : '/reserved',
+           url : '/reserved',
             views : {
                 'center' : { templateUrl : 'view/reserved.html' }
             }

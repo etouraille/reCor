@@ -33,6 +33,23 @@ app.controller('ModalSearchController', [
       $scope.$on('modal.removed', function() {
         // Execute action
       });
+        
+     $scope.$watch(function(){ return $scope.initial; },function(letters){
+           
+         $scope.$apply(function(){
+                $log.log('cat');
+                $http.post(settings.endpoint + 'logged-area/autocomplete', {letters : letters})
+                .success(function(data){
+                    $log.log('cat');
+                    $log.log(data);     
+                })
+                .error(function(data) {
+                    $log.log(data);
+                    $log.log('dog');
+                });
+           });
+        });
+
 
                       
 }]);
