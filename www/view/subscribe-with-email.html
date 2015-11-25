@@ -1,0 +1,20 @@
+<form name="form" class="list" ng-controller="SubscribeWithEmail" novalidate>
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+    Pseudo:
+      <input type="text" ng-model="username" value="anonymous" 
+      placeholder="Anonymous" />  
+    </label>
+  </div>
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+    Email:
+      <input type="email" placeholder="Email" ng-model="email" emailexists name="email">
+        <span ng-show="form.email.$error.emailexists">This emails already taken!</span>
+        <span ng-show="form.email.$error.email">This email is invalid</span>
+    </label>
+    <button ng-click="subscribe()" class="button button-small" ng-disabled="form.$invalid || form.email.$pristine" >
+      Subscribe
+    </button>
+  </div>
+</form>

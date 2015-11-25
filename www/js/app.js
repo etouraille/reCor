@@ -84,6 +84,14 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
                 'right' : { templateUrl : 'view/menu.html' }
             }
         })
+        .state('subscribeWithEmail',{
+            url : '/subscribe-with-email',
+            views : {
+                'center' : { templateUrl : 'view/subscribe-with-email.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+
         .state('around',{
             url : '/around?id',
             views : {
