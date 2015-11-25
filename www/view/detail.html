@@ -1,0 +1,17 @@
+<div ng-controller="DetailController">
+    <div class="list">
+        <label class="item">
+            <div class="input-label">Journal : </div> {{ resource.category }} 
+        </label>
+        <label class="item">
+            <div class="input-label">Message : </div> {{ resource.message }} 
+        </label>
+         <label class="item">
+            <div class="input-label">Date de création : </div> {{ time  }} 
+        </label>
+        <label>
+            <button class="button"ng-click="reserve()">Reserver</button>
+        </label>
+    </div>
+    <div id="map-canvas"></div>
+</div>

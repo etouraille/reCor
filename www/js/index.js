@@ -33,26 +33,8 @@ var appCordova = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        appCordova.receivedEvent('deviceready');
         var eventDeviceReady = new CustomEvent('deviceready');
         document.getElementById('notification').dispatchEvent(eventDeviceReady);
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        console.log('Received Event: ' + id);
-
-        window.push.register(function (id, data){
-            var event = new CustomEvent('Notification', { 'detail': {'id' : id, 'data' : data }});
-            document.getElementById('notification').dispatchEvent(event);
-            console.log('Event received ' + id + ' ' + data );
-        },{ 
-                'host' : 'objetspartages.org', 
-                'port' : '5672' , 
-                'username' : 'toto', 
-                'password' : 'toto' , 
-                'virtualHost' : 'toto', 
-                'routingKey' : 'edy' 
-        });
     }
 };
 $(document).ready(function(){

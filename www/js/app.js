@@ -8,6 +8,9 @@ var app = angular.module('resourceApp', [
     'angular-md5', 
     'ngCookies', 
     'ui.router',
+    'ngCordova',
+    'ngMaterial',
+    'ngAria',
 ])
 .run([
     '$ionicPlatform',
@@ -40,20 +43,22 @@ app.config(['$httpProvider', function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor');
 }]);
 app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $urlRouterProvider ){
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/search');
 
     $stateProvider
-        .state('home',{
-            url : '/home',
+        .state('add',{
+            url : '/add',
             views : {
                 'center' : { templateUrl : 'view/home.html' },
-                'left' : { templateUrl : 'view/place.html' }
+                'left' : { templateUrl : 'view/place.html' },
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('reserved',{
            url : '/reserved',
             views : {
-                'center' : { templateUrl : 'view/reserved.html' }
+                'center' : { templateUrl : 'view/reserved.html' },
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
 
@@ -61,21 +66,74 @@ app.config(['$stateProvider', '$urlRouterProvider' , function($stateProvider, $u
             url : '/search',
             views :{ 
                 'center' : { templateUrl : 'view/search.html' },
-                'left' : { templateUrl :   'view/resource.html' }    
+                'left' : { templateUrl :   'view/resource.html' },   
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('login',{
             url : '/login',
             views : {
-                'center' : { templateUrl : 'view/login.html'}
+                'center' : { templateUrl : 'view/login.html'},
+                'right' : { templateUrl : 'view/menu.html' }
             }
         })
         .state('subscribe',{
             url : '/subscribe',
             views : {
-                'center' : { templateUrl : 'view/subscribe.html' }
+                'center' : { templateUrl : 'view/subscribe.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('around',{
+            url : '/around?id',
+            views : {
+                'center' : { templateUrl : 'view/detail.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('notification',{
+            url : '/notification',
+            views : {
+                'center' : { templateUrl : 'view/notification.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('mySearch',{
+            url : '/my-search',
+            views : {
+                'center' : { templateUrl : 'view/mySearch.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('chat',{
+            url : '/chat?to',
+            views : {
+                'center' : { templateUrl : 'view/chat.html' },
+                'footer' : { templateUrl : 'view/chatFooter.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('conversation',{
+            url : '/conversation',
+            views : {
+                'center' : { templateUrl : 'view/conversation.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+
+        .state('createToken',{
+            url : '/forgotten',
+            views : {
+                'center' : { templateUrl : 'view/createToken.html' },
+                'right' : { templateUrl : 'view/menu.html' }
+            }
+        })
+        .state('changePassword',{
+            url : '/change-password?token',
+            views : {
+                'center' : { templateUrl : 'view/changePassword.html' },
+                'right' : { templateUrl : 'view/menu.html' }
             }
         });
-       
 }]);
 

@@ -1,0 +1,14 @@
+<div>
+    <div class="content-stable"
+                 on-swipe-left="hideTime = false"
+                 on-swipe-right="hideTime = true">
+
+      <div ng-repeat="message in messages"
+           class="messages" ng-class="{'other' : message.from == me }">
+        <div class="message" >
+            <span>{{ message.content }}</span>
+        </div>
+        <div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{message.timestamp}}</div>
+      </div>
+    </div>
+</div>

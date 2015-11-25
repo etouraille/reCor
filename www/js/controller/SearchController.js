@@ -7,8 +7,14 @@ app.controller('SearchController', [
     '$log',
     '$ionicModal',
     '$state',
-    function($http, $scope, $rootScope, settings, localization, $log, $ionicModal, $state) {
+    '$cordovaSplashscreen',
+    function($http, $scope, $rootScope, settings, localization, $log, $ionicModal, $state, $cordovaSplashscreen ) {
+    
+    //$cordovaSplashscreen.show();
 
+    var height = screen.height - 44 + 'px';
+    $('#map-canvas').css({ 'height' : height });
+    
     $scope.options = [
         {value : '0.5km' , label : '500m'}, 
         {value : '1km',  label : '1km' },
@@ -100,6 +106,15 @@ app.controller('SearchController', [
                 infowindow = new google.maps.InfoWindow({
                           content: result._source.content,
                           maxWidth: 200
+                });
+
+                google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+                    //this part runs when the mapobject is created and rendered
+                    //    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+                    //            //this part runs when the mapobject shown for the first time
+                    //                });
+
+                    //$cordovaSplashscreen.hide();
                 });
 
                 google.maps.event.addListener(marker,'click', function() {

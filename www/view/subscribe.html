@@ -5,7 +5,7 @@
                 <span ng-show="form.username.$error.require || form.username.$error.minlength">The name is mandatory</span>
             </label>
             <label class="item item-input">
-                <input type="email" ng-model="user.email" placeholder="Email" name="email" emailexists minlength="4"/>
+                <input type="email" ng-model="user.email" ng-model-options="{ updateOn : 'blur'}" placeholder="Email" name="email" emailexists minlength="4"/>
                 <br />
                 <span ng-show="form.email.$pending.emailexists">Checking if this email is available...</span>
                 <span ng-show="form.email.$error.emailexists">This email is already taken!</span>

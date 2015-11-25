@@ -5,21 +5,8 @@
                 Localization ...
             </label>
 
-            <label class="item item-input">
-                <input type="text" ng-model="diese" placeholder="#any" />
-            </label>
-             <label class="item item-input item-select">
-                 <div class="input-label">Select a distance</div>
-                 <select ng-options="option.label for option in options track by option.value" ng-model="distance" ></select>
-            </label>
-            <label class="item item-input">
-                <button ng-disabled="localization === false" class="button" ng-click="submit()">Search</button>
-            </label>
-            <label class="item item-input">
-                <button class="button" ng-click="openModal()">My Search</button>
-            </label>
         </div>
-        <div id="map-canvas" width="100%" style="height:400px;position:relative;bottom:0px;top:0px;";></div>
+        <div id="map-canvas"></div>
     </form>
 </div>
 <script id="save-search" type="text/ng-template" ng-controller="ModalSearchController">

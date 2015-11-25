@@ -1,0 +1,8 @@
+.scroll{
+    height: 100%;
+}
+
+#map-canvas {
+    width: 100%;
+    top: -22px;
+}

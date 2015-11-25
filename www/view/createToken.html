@@ -1,0 +1,11 @@
+<form name="form" ng-controller="CreateTokenController" class="css-form" novalidate>
+        <div class="list">
+             <label class="item item-input">
+                <input type="email" ng-model="user.email" name="email" placeholder="Email de creation du compte" require minlength="1" email/>
+                <span ng-show="form.email.$error.require || form.username.$error.minlength">The email is mandatory</span>
+            </label>
+            <label class="item item-input">
+                <button class="button" ng-disabled="form.$invalid || form.email.$pristine" ng-click="createToken()">Ask for new password, an email will be send</button>
+            </label>
+        </div>
+</form>

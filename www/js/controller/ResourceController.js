@@ -4,13 +4,17 @@ app.controller('ResourceController', [
         'settings',
         '$stateParams',
         '$log',
-        function($scope, $http, settings, $stateParams, $log ) {
+        '$state',
+        '$ionicSideMenuDelegate',
+        '$timeout',
+        function($scope, $http, settings, $stateParams, $log, $state, $menu, $timeout ) {
              //resource detail, for instance hashtag, description.
             $scope.data = '';
             $scope.$on('left', function(event, args) {
-                $log.log(args);
-                $log.log(args);
                 $scope.hashtag = args.content;
+                $scope.newspaper = args.category;
+                $scope.message = args.message;
+                $scope.to = args.userid;
                 $http.get(settings.cdn + 'get/'+args.picture)
                 .success(function(data) {
                     $scope.data = data.content;
@@ -30,6 +34,15 @@ app.controller('ResourceController', [
                             $log.error(data);
                         })
                 };
+
+                $scope.message = function() {
+                    $log.log('userId', $scope.to);
+                    
+                    $menu.toggleLeft();
+                    $timeout(function(){
+                        $state.go('chat' , { to : $scope.to });
+                    }, 1000 );
+                }
 
             })
         }

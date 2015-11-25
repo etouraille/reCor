@@ -3,14 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" width="device-width" content="target-densitydpi=device-dpi" />
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="bower_components/ion-autocomplete/dist/ion-autocomplete.css" rel="stylesheet">
-    <!-- IF using Sass (run gulp sass first), then remove the CSS include above
+    <!-- IF using Sass (run gulp sass first), then remove the CSS include above -->
+    <link href="lib/angular-material/angular-material.css" rel="stylesheet">
+
+    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -32,19 +35,32 @@
     <script type="text/javascript" src="js/controller/ionSideMenus.js"></script>
     <script type="text/javascript" src="js/controller/ReservedController.js"></script>
     <script type="text/javascript" src="js/controller/PlaceController.js"></script>
+    <script type="text/javascript" src="js/controller/CreateTokenController.js"></script>
+    <script type="text/javascript" src="js/controller/ChangePasswordController.js"></script>
+    <script type="text/javascript" src="js/controller/MySearchController.js"></script>
+    <script type="text/javascript" src="js/controller/DetailController.js"></script>
+    <script type="text/javascript" src="js/controller/ChatController.js"></script>
+    <script type="text/javascript" src="js/controller/ConversationController.js"></script>
+    <script type="text/javascript" src="js/controller/MenuController.js"></script>
+    <script type="text/javascript" src="js/controller/NotificationController.js"></script>
     <!-- services -->
     <script type="text/javascript" src="js/service/Authentication.js"></script>
     <script type="text/javascript" src="js/service/Encryption.js"></script>
     <script type="text/javascript" src="js/service/AuthStorage.js"></script>
     <script type="text/javascript" src="js/service/AuthInterceptor.js"></script>
     <script type="text/javascript" src="js/service/Localization.js"></script>
+    <script type="text/javascript" src="js/service/NotificationStorage.js"></script>
     <script type="text/javascript" src="js/service/Notification.js"></script>
+
     <!--directive -->
     <script type="text/javascript" src="js/directive/validation/EmailDirective.js"></script>
     <script type="text/javascript" src="js/directive/validation/CompareDirective.js"></script>
     <script type="text/javascript" src="js/directive/validation/HashtagDirective.js"></script>
     <script type="text/javascript" src="js/directive/Notification.js"></script>
     <script type="text/javascript" src="js/directive/Message.js"></script>
+    <script type="text/javascript" src="js/directive/Location.js"></script>
+    <script type="text/javascript" src="js/directive/ChatInputDirective.js"></script>
+    <script type="text/javascript" src="js/directive/Alert.js"></script>
 
     <!-- configuration -->
     <script type="text/javascript" src="js/config/settings.js"></script>
@@ -54,32 +70,41 @@
     <script type="text/javascript" src="lib/angular-cookies/angular-cookies.js"></script>
     <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="lib/angular-momentjs/angular-moment.js"></script>
-    
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
+    <script type="text/javascript" src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script type="text/javascript" src="lib/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="lib/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA_HxDJkh0VheLPqFU6pwMOtqg-cwrSSI4"></script>
     <script src="js/index.js"></script>
     </head>
 
-  <body notification id="notification" >
+  <body notification id="notification" ng-controller="ChatController" >
+  <ion-pane ng-class="{'messaging-view' : isChat }">
     <ion-side-menus>
       <ion-side-menu-content ng-controller="ionSideMenus">
         <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced"  ng-controller="HeaderController">
             <div class=ion-navicon-round" data-tags="menu, hamburger, slide menu"></div>
             <div class="title">#@T</div>
-
+            <alert></alert>
             <div class="buttons" ng-show="isLogged">
-                <button ui-sref="home" class="button button-light">Add</button>
+                <button ui-sref="add" class="button button-light">Add</button>
                 <button ui-sref="search" class="button button-light">Search</button>
                 <button ui-sref="reserved" class="button button-light">Reserved</button>
+                <button class="button icon ion-navicon" ng-click="rightMenu()"></button>
             </div>
         </ion-header-bar>
         <ion-content class="has-header">
-            <message></message>
             <div ui-view="center"></div>
-        </ion-content>
+      </ion-content>
       </ion-side-menu-content>
       <ion-side-menu side="left">
         <div ui-view="left"></div>
       </ion-side-menu>
+      <ion-side-menu side="right">
+        <div ui-view="right"></div>
+      </ion-side-menu>
     </ion-side-menus>
+    <div ui-view="footer"></div>
+    </ion-pane>
   </body>
-</html>
+  </html>

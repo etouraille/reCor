@@ -1,0 +1,5 @@
+<div class="list" ng-controller="NotificationController">
+    <div class="item item-button" ng-class="{'unread' : notification.read == false}" ng-repeat="(id,notification) in notifications">
+        {{ notification.content }} {{ notification.type }}<button class="button" ng-click="go(id,notification)">Go</button>
+    </div>
+</div>

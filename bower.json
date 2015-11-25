@@ -12,5 +12,8 @@
     "ionicons": "~2.0.1",
     "ion-autocomplete": "~0.3.0",
     "moment": "~2.10.6"
+    "ngCordova": "~0.1.17-alpha",
+    "angular-material": "~0.10.0",
+    "angular-momentjs": "~0.2.2"
   }
 }
