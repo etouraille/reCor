@@ -34,6 +34,15 @@ app.controller('MenuController', [
             $state.go('mySearch');
             
         }
+        $scope.add = function() {
+            $sideMenu.toggleRight();
+            $state.go('add');
+        }
+        $scope.reserved = function() {
+            $sideMenu.toggleRight();
+            $state.go('reserved');
+        }
+
 
     
     }

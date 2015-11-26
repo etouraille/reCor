@@ -8,4 +8,10 @@
     <label class="item">
         <button class="button" ng-click="search()">Recherche Enregistrées</button>
     </label>
+    <label class="item" ng-show="isLogged">
+        <button ng-click="add()" class="button button-light">Add</button>
+    </label>            
+    <label class="item" ng-show="isLogged">
+        <button ng-click="reserved()" class="button button-light">Reserved</button>
+    </label>
 </div>

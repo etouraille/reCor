@@ -83,18 +83,21 @@
   <ion-pane ng-class="{'messaging-view' : isChat }">
     <ion-side-menus>
       <ion-side-menu-content ng-controller="ionSideMenus">
-        <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced"  ng-controller="HeaderController">
+        <ion-header-bar no-tap-scroll=true class="bar bar-header bar-balanced item-input-inset"  ng-controller="HeaderController">
             <div class=ion-navicon-round" data-tags="menu, hamburger, slide menu"></div>
-            <div class="title">#@T</div>
             <alert></alert>
-            <div class="buttons" ng-show="isLogged">
-                <button ui-sref="add" class="button button-light">Add</button>
-                <button ui-sref="search" class="button button-light">Search</button>
-                <button ui-sref="reserved" class="button button-light">Reserved</button>
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+                <input type="search" placeholder="Search">
+            </label>
+                <button class="button button-clear">
+                 search
+            </button>
+            <div>
                 <button class="button icon ion-navicon" ng-click="rightMenu()"></button>
             </div>
         </ion-header-bar>
-        <ion-content class="has-header">
+    <ion-content class="has-header">
             <div ui-view="center"></div>
       </ion-content>
       </ion-side-menu-content>
@@ -109,3 +112,4 @@
     </ion-pane>
   </body>
   </html>
+
