@@ -34,7 +34,7 @@ app.factory('Notification',
                         //check if the user is authentified and if the registration token 
                         //changes on each registration.
                         // pb : the app might be fourgroud, but still on the screen, 
-                        // while screen is lock for exemple : the notification, fires
+                        // while screen is lock for example : the notification, fires
                         // and nothing display on the messaging screen.
                         $http.post(settings.endpoint + 'logged-area/notification/register',
                                    { device : 'android', regId : e.regid})
